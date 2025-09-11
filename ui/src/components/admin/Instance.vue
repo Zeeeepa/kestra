@@ -14,8 +14,12 @@
                                         <div class="status-icon text-success mb-2">
                                             <CheckCircle style="font-size: 2.5rem;" />
                                         </div>
-                                        <h6 class="card-title">{{ $t('instance.system_status') }}</h6>
-                                        <p class="card-text text-success">{{ $t('instance.healthy') }}</p>
+                                        <h6 class="card-title">
+                                            {{ $t('instance.system_status') }}
+                                        </h6>
+                                        <p class="card-text text-success">
+                                            {{ $t('instance.healthy') }}
+                                        </p>
                                         <small class="text-muted">{{ $t('instance.uptime') }}: {{ systemInfo.uptime }}</small>
                                     </div>
                                 </div>
@@ -26,8 +30,12 @@
                                         <div class="status-icon text-primary mb-2">
                                             <Memory style="font-size: 2.5rem;" />
                                         </div>
-                                        <h6 class="card-title">{{ $t('instance.memory_usage') }}</h6>
-                                        <p class="card-text">{{ systemInfo.memoryUsage }}%</p>
+                                        <h6 class="card-title">
+                                            {{ $t('instance.memory_usage') }}
+                                        </h6>
+                                        <p class="card-text">
+                                            {{ systemInfo.memoryUsage }}%
+                                        </p>
                                         <el-progress :percentage="systemInfo.memoryUsage" :color="getProgressColor(systemInfo.memoryUsage)" />
                                     </div>
                                 </div>
@@ -38,8 +46,12 @@
                                         <div class="status-icon text-warning mb-2">
                                             <Cpu style="font-size: 2.5rem;" />
                                         </div>
-                                        <h6 class="card-title">{{ $t('instance.cpu_usage') }}</h6>
-                                        <p class="card-text">{{ systemInfo.cpuUsage }}%</p>
+                                        <h6 class="card-title">
+                                            {{ $t('instance.cpu_usage') }}
+                                        </h6>
+                                        <p class="card-text">
+                                            {{ systemInfo.cpuUsage }}%
+                                        </p>
                                         <el-progress :percentage="systemInfo.cpuUsage" :color="getProgressColor(systemInfo.cpuUsage)" />
                                     </div>
                                 </div>
@@ -50,8 +62,12 @@
                                         <div class="status-icon text-info mb-2">
                                             <HardDisk style="font-size: 2.5rem;" />
                                         </div>
-                                        <h6 class="card-title">{{ $t('instance.disk_usage') }}</h6>
-                                        <p class="card-text">{{ systemInfo.diskUsage }}%</p>
+                                        <h6 class="card-title">
+                                            {{ $t('instance.disk_usage') }}
+                                        </h6>
+                                        <p class="card-text">
+                                            {{ systemInfo.diskUsage }}%
+                                        </p>
                                         <el-progress :percentage="systemInfo.diskUsage" :color="getProgressColor(systemInfo.diskUsage)" />
                                     </div>
                                 </div>
@@ -61,7 +77,9 @@
                         <!-- Services Status -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h5 class="mb-0">{{ $t('instance.services_status') }}</h5>
+                                <h5 class="mb-0">
+                                    {{ $t('instance.services_status') }}
+                                </h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -70,10 +88,12 @@
                                             <div class="service-status me-3">
                                                 <CheckCircle v-if="service.status === 'running'" class="text-success" />
                                                 <AlertCircle v-else-if="service.status === 'warning'" class="text-warning" />
-                                                <XCircle v-else class="text-danger" />
+                                                <Close v-else class="text-danger" />
                                             </div>
                                             <div class="service-info flex-grow-1">
-                                                <h6 class="mb-1">{{ service.name }}</h6>
+                                                <h6 class="mb-1">
+                                                    {{ service.name }}
+                                                </h6>
                                                 <small class="text-muted">{{ service.description }}</small>
                                                 <div class="mt-1">
                                                     <el-tag :type="getServiceStatusType(service.status)" size="small">
@@ -92,7 +112,9 @@
                     <el-tab-pane :label="$t('instance.maintenance')" name="maintenance">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="mb-0">{{ $t('instance.maintenance_mode') }}</h5>
+                                <h5 class="mb-0">
+                                    {{ $t('instance.maintenance_mode') }}
+                                </h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -102,10 +124,10 @@
                                             :title="$t('instance.maintenance_active')"
                                             type="warning"
                                             :description="$t('instance.maintenance_active_desc')"
-                                            show-icon
+                                            showIcon
                                             :closable="false"
                                         />
-                                        <el-form :model="maintenanceMode" label-width="150px">
+                                        <el-form :model="maintenanceMode" labelWidth="150px">
                                             <el-form-item :label="$t('instance.enable_maintenance')">
                                                 <el-switch 
                                                     v-model="maintenanceMode.enabled" 
@@ -143,7 +165,9 @@
                     <el-tab-pane :label="$t('instance.announcements')" name="announcements">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">{{ $t('instance.system_announcements') }}</h5>
+                                <h5 class="mb-0">
+                                    {{ $t('instance.system_announcements') }}
+                                </h5>
                                 <el-button type="primary" @click="showAnnouncementDialog = true">
                                     <Plus class="me-2" />
                                     {{ $t('instance.create_announcement') }}
@@ -152,8 +176,12 @@
                             <div class="card-body">
                                 <div v-if="announcements.length === 0" class="text-center py-5">
                                     <Bullhorn class="text-muted mb-3" style="font-size: 4rem;" />
-                                    <h6 class="text-muted">{{ $t('instance.no_announcements') }}</h6>
-                                    <p class="text-muted">{{ $t('instance.no_announcements_desc') }}</p>
+                                    <h6 class="text-muted">
+                                        {{ $t('instance.no_announcements') }}
+                                    </h6>
+                                    <p class="text-muted">
+                                        {{ $t('instance.no_announcements_desc') }}
+                                    </p>
                                 </div>
                                 <div v-else>
                                     <div v-for="announcement in announcements" :key="announcement.id" class="announcement-item mb-3">
@@ -161,14 +189,16 @@
                                             :title="announcement.title"
                                             :type="announcement.type"
                                             :description="announcement.message"
-                                            show-icon
+                                            showIcon
                                             :closable="false"
                                         >
                                             <template #default>
                                                 <div class="d-flex justify-content-between align-items-start">
                                                     <div>
                                                         <h6>{{ announcement.title }}</h6>
-                                                        <p class="mb-2">{{ announcement.message }}</p>
+                                                        <p class="mb-2">
+                                                            {{ announcement.message }}
+                                                        </p>
                                                         <small class="text-muted">
                                                             {{ $t('instance.created_by') }}: {{ announcement.createdBy }} | 
                                                             {{ formatDate(announcement.createdAt) }}
@@ -202,7 +232,9 @@
                     <el-tab-pane :label="$t('instance.system_info')" name="system">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="mb-0">{{ $t('instance.system_information') }}</h5>
+                                <h5 class="mb-0">
+                                    {{ $t('instance.system_information') }}
+                                </h5>
                             </div>
                             <div class="card-body">
                                 <el-descriptions :column="2" border>
@@ -241,7 +273,7 @@
 
     <!-- Announcement Dialog -->
     <el-dialog v-model="showAnnouncementDialog" :title="editingAnnouncement ? $t('instance.edit_announcement') : $t('instance.create_announcement')" width="600px">
-        <el-form :model="announcementForm" label-width="120px">
+        <el-form :model="announcementForm" labelWidth="120px">
             <el-form-item :label="$t('title')" required>
                 <el-input v-model="announcementForm.title" :placeholder="$t('instance.announcement_title_placeholder')" />
             </el-form-item>
@@ -263,7 +295,9 @@
             </el-form-item>
         </el-form>
         <template #footer>
-            <el-button @click="showAnnouncementDialog = false">{{ $t('cancel') }}</el-button>
+            <el-button @click="showAnnouncementDialog = false">
+                {{ $t('cancel') }}
+            </el-button>
             <el-button type="primary" @click="saveAnnouncement">
                 {{ editingAnnouncement ? $t('update') : $t('create') }}
             </el-button>
@@ -280,10 +314,10 @@
     import DotsVertical from "vue-material-design-icons/DotsVertical.vue";
     import CheckCircle from "vue-material-design-icons/CheckCircle.vue";
     import AlertCircle from "vue-material-design-icons/AlertCircle.vue";
-    import XCircle from "vue-material-design-icons/XCircle.vue";
+    import Close from "vue-material-design-icons/Close.vue";
     import Memory from "vue-material-design-icons/Memory.vue";
-    import Cpu from "vue-material-design-icons/Cpu.vue";
-    import HardDisk from "vue-material-design-icons/HardDisk.vue";
+    import Cpu from "vue-material-design-icons/Cpu64Bit.vue";
+    import HardDisk from "vue-material-design-icons/Harddisk.vue";
     import Bullhorn from "vue-material-design-icons/Bullhorn.vue";
     import useRouteContext from "../../mixins/useRouteContext";
 
@@ -296,157 +330,157 @@
     useRouteContext(routeInfo);
 
     // Reactive data
-    const activeTab = ref('overview');
+    const activeTab = ref("overview");
     const showAnnouncementDialog = ref(false);
     const editingAnnouncement = ref(null);
 
     const systemInfo = ref({
-        uptime: '7 days, 14 hours',
+        uptime: "7 days, 14 hours",
         memoryUsage: 65,
         cpuUsage: 23,
         diskUsage: 45,
-        version: '0.15.0',
-        buildDate: new Date('2024-01-10T10:00:00'),
-        javaVersion: 'OpenJDK 21.0.1',
-        operatingSystem: 'Linux Ubuntu 22.04',
-        totalMemory: '8 GB',
-        availableProcessors: '4 cores',
-        databaseType: 'PostgreSQL 15.2',
-        storageType: 'Local File System'
+        version: "0.15.0",
+        buildDate: new Date("2024-01-10T10:00:00"),
+        javaVersion: "OpenJDK 21.0.1",
+        operatingSystem: "Linux Ubuntu 22.04",
+        totalMemory: "8 GB",
+        availableProcessors: "4 cores",
+        databaseType: "PostgreSQL 15.2",
+        storageType: "Local File System"
     });
 
     const services = ref([
         {
-            name: 'Webserver',
-            description: 'HTTP API and Web UI',
-            status: 'running'
+            name: "Webserver",
+            description: "HTTP API and Web UI",
+            status: "running"
         },
         {
-            name: 'Scheduler',
-            description: 'Flow scheduling service',
-            status: 'running'
+            name: "Scheduler",
+            description: "Flow scheduling service",
+            status: "running"
         },
         {
-            name: 'Executor',
-            description: 'Task execution engine',
-            status: 'running'
+            name: "Executor",
+            description: "Task execution engine",
+            status: "running"
         },
         {
-            name: 'Worker',
-            description: 'Task processing workers',
-            status: 'warning'
+            name: "Worker",
+            description: "Task processing workers",
+            status: "warning"
         },
         {
-            name: 'Indexer',
-            description: 'Search indexing service',
-            status: 'running'
+            name: "Indexer",
+            description: "Search indexing service",
+            status: "running"
         },
         {
-            name: 'Database',
-            description: 'PostgreSQL database',
-            status: 'running'
+            name: "Database",
+            description: "PostgreSQL database",
+            status: "running"
         }
     ]);
 
     const maintenanceMode = ref({
         enabled: false,
-        message: '',
+        message: "",
         scheduledEnd: null
     });
 
     const announcements = ref([
         {
             id: 1,
-            title: 'Scheduled Maintenance',
-            message: 'System maintenance is scheduled for this weekend. Some services may be temporarily unavailable.',
-            type: 'warning',
-            createdBy: 'admin',
-            createdAt: new Date('2024-01-14T09:00:00')
+            title: "Scheduled Maintenance",
+            message: "System maintenance is scheduled for this weekend. Some services may be temporarily unavailable.",
+            type: "warning",
+            createdBy: "admin",
+            createdAt: new Date("2024-01-14T09:00:00")
         },
         {
             id: 2,
-            title: 'New Features Available',
-            message: 'We have released new workflow templates and improved performance monitoring.',
-            type: 'success',
-            createdBy: 'admin',
-            createdAt: new Date('2024-01-12T15:30:00')
+            title: "New Features Available",
+            message: "We have released new workflow templates and improved performance monitoring.",
+            type: "success",
+            createdBy: "admin",
+            createdAt: new Date("2024-01-12T15:30:00")
         }
     ]);
 
     const announcementForm = ref({
-        title: '',
-        type: '',
-        message: ''
+        title: "",
+        type: "",
+        message: ""
     });
 
     // Methods
     function getProgressColor(percentage: number) {
-        if (percentage < 50) return '#67c23a';
-        if (percentage < 80) return '#e6a23c';
-        return '#f56c6c';
+        if (percentage < 50) return "#67c23a";
+        if (percentage < 80) return "#e6a23c";
+        return "#f56c6c";
     }
 
     function getServiceStatusType(status: string) {
         switch (status) {
-            case 'running': return 'success';
-            case 'warning': return 'warning';
-            case 'stopped': return 'danger';
-            default: return 'info';
+        case "running": return "success";
+        case "warning": return "warning";
+        case "stopped": return "danger";
+        default: return "info";
         }
     }
 
     function formatDate(date: Date) {
-        return new Intl.DateTimeFormat('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
+        return new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
         }).format(date);
     }
 
     function toggleMaintenanceMode(enabled: boolean) {
         if (enabled) {
-            ElMessage.warning(t('instance.maintenance_enabled'));
+            ElMessage.warning(t("instance.maintenance_enabled"));
         } else {
-            ElMessage.success(t('instance.maintenance_disabled'));
+            ElMessage.success(t("instance.maintenance_disabled"));
         }
     }
 
     function updateMaintenanceMode() {
-        ElMessage.success(t('instance.maintenance_updated'));
+        ElMessage.success(t("instance.maintenance_updated"));
     }
 
     function handleAnnouncementAction(command: any) {
-        if (command.action === 'edit') {
+        if (command.action === "edit") {
             editAnnouncement(command.announcement);
-        } else if (command.action === 'delete') {
+        } else if (command.action === "delete") {
             deleteAnnouncement(command.announcement);
         }
     }
 
     function editAnnouncement(announcement: any) {
         editingAnnouncement.value = announcement;
-        announcementForm.value = { ...announcement };
+        announcementForm.value = {...announcement};
         showAnnouncementDialog.value = true;
     }
 
     async function deleteAnnouncement(announcement: any) {
         try {
             await ElMessageBox.confirm(
-                t('instance.delete_announcement_confirm', { title: announcement.title }),
-                t('confirm'),
+                t("instance.delete_announcement_confirm", {title: announcement.title}),
+                t("confirm"),
                 {
-                    confirmButtonText: t('delete'),
-                    cancelButtonText: t('cancel'),
-                    type: 'warning',
+                    confirmButtonText: t("delete"),
+                    cancelButtonText: t("cancel"),
+                    type: "warning",
                 }
             );
             
             const index = announcements.value.findIndex(a => a.id === announcement.id);
             if (index > -1) {
                 announcements.value.splice(index, 1);
-                ElMessage.success(t('instance.announcement_deleted'));
+                ElMessage.success(t("instance.announcement_deleted"));
             }
         } catch {
             // User cancelled
@@ -455,7 +489,7 @@
 
     function saveAnnouncement() {
         if (!announcementForm.value.title.trim() || !announcementForm.value.message.trim()) {
-            ElMessage.error(t('instance.announcement_fields_required'));
+            ElMessage.error(t("instance.announcement_fields_required"));
             return;
         }
 
@@ -467,26 +501,26 @@
                     ...announcements.value[index], 
                     ...announcementForm.value
                 };
-                ElMessage.success(t('instance.announcement_updated'));
+                ElMessage.success(t("instance.announcement_updated"));
             }
         } else {
             // Create new announcement
             const newAnnouncement = {
                 id: Date.now(),
                 ...announcementForm.value,
-                createdBy: 'admin',
+                createdBy: "admin",
                 createdAt: new Date()
             };
             announcements.value.unshift(newAnnouncement);
-            ElMessage.success(t('instance.announcement_created'));
+            ElMessage.success(t("instance.announcement_created"));
         }
 
         showAnnouncementDialog.value = false;
         editingAnnouncement.value = null;
         announcementForm.value = {
-            title: '',
-            type: '',
-            message: ''
+            title: "",
+            type: "",
+            message: ""
         };
     }
 

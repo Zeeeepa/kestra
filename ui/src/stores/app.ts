@@ -28,8 +28,8 @@ interface App {
     namespace: string;
     name: string;
     description?: string;
-    type: 'form' | 'dashboard' | 'workflow-trigger' | 'custom';
-    status: 'active' | 'inactive' | 'draft';
+    type: "form" | "dashboard" | "workflow-trigger" | "custom";
+    status: "active" | "inactive" | "draft";
     source: string;
     revision?: number;
     labels?: Record<string, string | boolean>;
@@ -47,7 +47,7 @@ interface AppExecution {
     id: string;
     appId: string;
     namespace: string;
-    status: 'running' | 'success' | 'failed' | 'cancelled';
+    status: "running" | "success" | "failed" | "cancelled";
     startDate: Date;
     endDate?: Date;
     duration?: number;
@@ -74,7 +74,7 @@ export const useAppStore = defineStore("app", () => {
     const revisions = ref<any[]>();
     const appValidation = ref<AppValidations>();
     const metrics = ref<any[]>();
-    const executeApp = ref<boolean>(false);
+    const executeAppLoading = ref<boolean>(false);
     const lastSaveApp = ref<string>();
     const isCreating = ref<boolean>(false);
     const appYaml = ref<string>("");
@@ -101,13 +101,13 @@ export const useAppStore = defineStore("app", () => {
     });
 
     const appStats = computed(() => {
-        if (!apps.value) return { total: 0, active: 0, inactive: 0, draft: 0 };
+        if (!apps.value) return {total: 0, active: 0, inactive: 0, draft: 0};
         
         return {
             total: apps.value.length,
-            active: apps.value.filter(app => app.status === 'active').length,
-            inactive: apps.value.filter(app => app.status === 'inactive').length,
-            draft: apps.value.filter(app => app.status === 'draft').length
+            active: apps.value.filter(app => app.status === "active").length,
+            inactive: apps.value.filter(app => app.status === "inactive").length,
+            draft: apps.value.filter(app => app.status === "draft").length
         };
     });
 
@@ -132,7 +132,7 @@ export const useAppStore = defineStore("app", () => {
         }
 
         try {
-            const response = await axios.get(apiUrl("apps"), { params });
+            const response = await axios.get(apiUrl("apps"), {params});
             
             apps.value = response.data.results || [];
             total.value = response.data.total || 0;
@@ -143,14 +143,14 @@ export const useAppStore = defineStore("app", () => {
             makeToast(t("error.fetch_apps"), "error");
             apps.value = [];
             total.value = 0;
-            return { results: [], total: 0 };
+            return {results: [], total: 0};
         }
     }
 
     async function findApp(namespace: string, id: string, revision?: number) {
         try {
-            const params = revision ? { revision } : {};
-            const response = await axios.get(apiUrl(`apps/${namespace}/${id}`), { params });
+            const params = revision ? {revision} : {};
+            const response = await axios.get(apiUrl(`apps/${namespace}/${id}`), {params});
             
             app.value = response.data;
             appYaml.value = response.data.source || "";
@@ -168,7 +168,7 @@ export const useAppStore = defineStore("app", () => {
     async function createApp(appData: Partial<App>) {
         try {
             const response = await axios.post(apiUrl("apps"), appData, {
-                headers: { "Content-Type": "application/x-yaml" }
+                headers: {"Content-Type": "application/x-yaml"}
             });
             
             makeToast(t("app.created_successfully"), "success");
@@ -183,7 +183,7 @@ export const useAppStore = defineStore("app", () => {
     async function updateApp(namespace: string, id: string, appData: Partial<App>) {
         try {
             const response = await axios.put(apiUrl(`apps/${namespace}/${id}`), appData, {
-                headers: { "Content-Type": "application/x-yaml" }
+                headers: {"Content-Type": "application/x-yaml"}
             });
             
             app.value = response.data;
@@ -216,7 +216,7 @@ export const useAppStore = defineStore("app", () => {
         }
     }
 
-    async function executeApp(namespace: string, id: string, inputs?: Record<string, any>) {
+    async function executeAppAction(namespace: string, id: string, inputs?: Record<string, any>) {
         try {
             const response = await axios.post(apiUrl(`apps/${namespace}/${id}/execute`), {
                 inputs: inputs || {}
@@ -240,28 +240,28 @@ export const useAppStore = defineStore("app", () => {
                 ...options
             };
 
-            const response = await axios.get(apiUrl(`apps/${namespace}/${id}/executions`), { params });
+            const response = await axios.get(apiUrl(`apps/${namespace}/${id}/executions`), {params});
             
             appExecutions.value = response.data.results || [];
             return response.data;
         } catch (error) {
             console.error("Error fetching app executions:", error);
             makeToast(t("error.fetch_app_executions"), "error");
-            return { results: [], total: 0 };
+            return {results: [], total: 0};
         }
     }
 
     async function validateApp(source: string) {
         try {
             const response = await axios.post(apiUrl("apps/validate"), source, {
-                headers: { "Content-Type": "application/x-yaml" }
+                headers: {"Content-Type": "application/x-yaml"}
             });
             
             appValidation.value = response.data;
             return response.data;
         } catch (error) {
             console.error("Error validating app:", error);
-            appValidation.value = { constraints: "Validation failed" };
+            appValidation.value = {constraints: "Validation failed"};
             return appValidation.value;
         }
     }
@@ -286,7 +286,7 @@ export const useAppStore = defineStore("app", () => {
                 ...options
             };
 
-            const response = await axios.get(apiUrl(`apps/${namespace}/${id}/metrics`), { params });
+            const response = await axios.get(apiUrl(`apps/${namespace}/${id}/metrics`), {params});
             metrics.value = response.data;
             return response.data;
         } catch (error) {
@@ -323,7 +323,7 @@ export const useAppStore = defineStore("app", () => {
         revisions,
         appValidation,
         metrics,
-        executeApp,
+        executeAppLoading,
         lastSaveApp,
         isCreating,
         appYaml,
@@ -342,7 +342,7 @@ export const useAppStore = defineStore("app", () => {
         createApp,
         updateApp,
         deleteApp,
-        executeApp: executeApp,
+        executeApp: executeAppAction,
         findAppExecutions,
         validateApp,
         loadRevisions,

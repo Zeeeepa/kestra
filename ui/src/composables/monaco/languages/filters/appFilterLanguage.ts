@@ -59,4 +59,4 @@ export class AppFilterLanguage extends FilterLanguage {
     }
 }
 
-export const AppFilterLanguage = new AppFilterLanguage();
+export const appFilterLanguage = new AppFilterLanguage();
