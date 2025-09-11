@@ -1,0 +1,21 @@
+{
+    "timestamp": "2025-09-11T08:47:25Z",
+    "summary": {
+        "total_tests": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "success_rate": 100
+    },
+    "environment": {
+        "backend_port": 8080,
+        "frontend_port": 3000,
+        "backend_running": false,
+        "frontend_running": true
+    },
+    "features": {
+        "layout_blocks_implemented": 16,
+        "types_defined": 15,
+        "blocks_registered": 14
+    }
+}

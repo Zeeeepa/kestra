@@ -42,6 +42,19 @@ export default [
     {name: "flows/create", path: "/:tenant?/flows/new", component: () => import("../components/flows/FlowCreate.vue")},
     {name: "flows/update", path: "/:tenant?/flows/edit/:namespace/:id/:tab?", component: () => import("../components/flows/FlowRoot.vue")},
 
+    //Apps
+    {name: "apps/list", path: "/:tenant?/apps", component: () => import("../components/apps/Apps.vue")},
+    {name: "apps/search", path: "/:tenant?/apps/search", component: () => import("../components/apps/AppsSearch.vue")},
+    {name: "apps/create", path: "/:tenant?/apps/new", component: () => import("../components/apps/AppCreate.vue")},
+    {name: "apps/update", path: "/:tenant?/apps/edit/:namespace/:id/:tab?", component: () => import("../components/apps/AppRoot.vue")},
+
+    //Tests
+    {name: "tests/list", path: "/:tenant?/tests", component: () => import("../components/tests/Tests.vue")},
+    {name: "tests/search", path: "/:tenant?/tests/search", component: () => import("../components/tests/TestsSearch.vue")},
+    {name: "tests/create", path: "/:tenant?/tests/new", component: () => import("../components/tests/TestCreate.vue")},
+    {name: "tests/update", path: "/:tenant?/tests/edit/:namespace/:id/:tab?", component: () => import("../components/tests/TestRoot.vue")},
+    {name: "tests/results", path: "/:tenant?/tests/:namespace/:id/results", component: () => import("../components/tests/TestResults.vue")},
+
     //Executions
     {name: "executions/list", path: "/:tenant?/executions", component: () => import("../components/executions/Executions.vue")},
     {name: "executions/update", path: "/:tenant?/executions/:namespace/:flowId/:id/:tab?", component: () => import("../components/executions/ExecutionRoot.vue")},
@@ -94,11 +107,11 @@ export default [
     //Errors
     {name: "errors/404-wildcard", path: "/:tenant?/:pathMatch(.*)", component: Errors, props: {code: 404}},
 
-    //Demo Pages
-    {name: "apps/list", path: "/:tenant?/apps", component: DemoApps},
-    {name: "tests/list", path: "/:tenant?/tests", component: DemoTests},
-    {name: "admin/iam", path: "/:tenant?/admin/iam", component: DemoIAM},
+    //Real Implementation Pages
+    {name: "apps/list", path: "/:tenant?/apps", component: () => import("../components/apps/Apps.vue")},
+    {name: "tests/list", path: "/:tenant?/tests", component: () => import("../components/tests/Tests.vue")},
+    {name: "admin/iam", path: "/:tenant?/admin/iam", component: () => import("../components/admin/IAM.vue")},
     {name: "admin/tenants/list", path: "/:tenant?/admin/tenants", component: DemoTenants},
-    {name: "admin/auditlogs/list", path: "/:tenant?/admin/auditlogs", component: DemoAuditLogs},
-    {name: "admin/instance", path: "/:tenant?/admin/instance", component: DemoInstance},
+    {name: "admin/auditlogs/list", path: "/:tenant?/admin/auditlogs", component: () => import("../components/admin/AuditLogs.vue")},
+    {name: "admin/instance", path: "/:tenant?/admin/instance", component: () => import("../components/admin/Instance.vue")},
 ];

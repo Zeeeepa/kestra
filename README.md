@@ -197,6 +197,276 @@ Stay connected and get support:
 
 ---
 
+## 🚀 Enhanced Features
+
+This enhanced version of Kestra includes powerful new capabilities that extend the core platform:
+
+### 🤖 AI Copilot Integration
+- **Natural Language Workflow Generation**: Convert plain English descriptions into complete Kestra YAML workflows
+- **Multi-Provider Support**: Integrated with Google Gemini, OpenAI GPT, and Anthropic Claude
+- **Interactive Chat Interface**: Get help, explanations, and suggestions through an AI-powered assistant
+- **Flow Refinement**: Improve existing workflows with AI-powered suggestions and optimizations
+
+### 📱 Apps Management
+- **Complete CRUD Operations**: Create, read, update, and delete workflow applications
+- **Execution Tracking**: Monitor app performance with detailed execution metrics
+- **Status Management**: Track app lifecycle states (draft, active, inactive, archived)
+- **Advanced Filtering**: Powerful search and filter capabilities with custom query language
+- **Bulk Operations**: Manage multiple apps simultaneously
+
+### 🧪 Tests Suite
+- **Comprehensive Testing Framework**: Create and manage test suites for your workflows
+- **CI/CD Integration**: Automated testing capabilities for continuous integration
+- **Success Rate Tracking**: Monitor test performance with detailed statistics
+- **Test Results Analysis**: Detailed reporting and analysis of test outcomes
+- **Automated Test Generation**: AI-powered test case generation
+
+### 📋 Custom Blueprints
+- **Organization Templates**: Create and share workflow templates within your organization
+- **Template Management**: Full lifecycle management for blueprint templates
+- **Usage Tracking**: Monitor template adoption and usage patterns
+- **Import/Export**: Share templates across different environments
+
+### 🔐 Secure API Key Management
+- **Encrypted Local Storage**: API keys are encrypted and stored securely in your browser
+- **Multi-Provider Support**: Manage keys for multiple AI providers
+- **Key Validation**: Test API keys before saving to ensure they work
+- **Import/Export**: Backup and restore API key configurations
+
+---
+
+## 🛠️ Local Development Setup
+
+### Prerequisites
+
+Before setting up Kestra locally, ensure you have the following installed:
+
+- **Java 21+** (OpenJDK or Oracle JDK)
+- **Node.js 18+** and **npm** (for UI development)
+- **Docker** (optional, for containerized setup)
+- **Git** (for version control)
+
+### Quick Start (Development)
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Zeeeepa/kestra.git
+   cd kestra
+   ```
+
+2. **Backend Setup**
+   ```bash
+   # Build the backend
+   ./gradlew build -x test
+   
+   # Start the Kestra server
+   ./gradlew run
+   ```
+
+3. **Frontend Setup (UI)**
+   ```bash
+   # Navigate to UI directory
+   cd ui
+   
+   # Install dependencies
+   npm install
+   
+   # Start development server
+   npm run dev
+   ```
+
+4. **Access the Application**
+   - Backend API: http://localhost:8080
+   - Frontend UI: http://localhost:3000 (development server)
+   - Production UI: http://localhost:8080 (when backend serves UI)
+
+### Production Setup
+
+1. **Build for Production**
+   ```bash
+   # Build the complete application
+   ./gradlew build
+   
+   # Build UI for production
+   cd ui && npm run build
+   ```
+
+2. **Run Production Build**
+   ```bash
+   # Start Kestra with production UI
+   java -jar build/libs/kestra-*.jar server standalone
+   ```
+
+3. **Docker Setup (Alternative)**
+   ```bash
+   # Build Docker image
+   docker build -t kestra-enhanced .
+   
+   # Run container
+   docker run -p 8080:8080 kestra-enhanced
+   ```
+
+### Environment Configuration
+
+Create a `.env` file in the root directory:
+
+```env
+# Database Configuration
+KESTRA_DATASOURCE_URL=jdbc:h2:mem:kestra
+KESTRA_DATASOURCE_USERNAME=sa
+KESTRA_DATASOURCE_PASSWORD=
+
+# Server Configuration
+KESTRA_SERVER_PORT=8080
+KESTRA_SERVER_HOST=localhost
+
+# Storage Configuration
+KESTRA_STORAGE_TYPE=local
+KESTRA_STORAGE_LOCAL_BASE_PATH=./storage
+
+# Security Configuration
+KESTRA_SECURITY_BASIC_ENABLED=false
+
+# Feature Flags
+KESTRA_FEATURES_AI_ENABLED=true
+KESTRA_FEATURES_APPS_ENABLED=true
+KESTRA_FEATURES_TESTS_ENABLED=true
+```
+
+### UI Development Configuration
+
+Create `ui/.env.development`:
+
+```env
+# API Configuration
+VITE_API_URL=http://localhost:8080
+VITE_WS_URL=ws://localhost:8080
+
+# Feature Flags
+VITE_ENABLE_AI_FEATURES=true
+VITE_ENABLE_APPS=true
+VITE_ENABLE_TESTS=true
+VITE_ENABLE_CUSTOM_BLUEPRINTS=true
+
+# Development Settings
+VITE_DEV_MODE=true
+VITE_LOG_LEVEL=debug
+```
+
+### AI Integration Setup
+
+To use the AI-powered features, you'll need to configure API keys:
+
+1. **Access Settings**: Navigate to the settings page in the UI
+2. **Configure API Keys**: Add your API keys for one or more providers:
+   - **Google Gemini**: Get your key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - **OpenAI**: Get your key from [OpenAI Platform](https://platform.openai.com/api-keys)
+   - **Anthropic**: Get your key from [Anthropic Console](https://console.anthropic.com/account/keys)
+
+3. **Test Configuration**: Use the built-in test functionality to verify your API keys work correctly
+
+### Database Setup (Optional)
+
+For production use, configure a persistent database:
+
+**PostgreSQL:**
+```env
+KESTRA_DATASOURCE_URL=jdbc:postgresql://localhost:5432/kestra
+KESTRA_DATASOURCE_USERNAME=kestra
+KESTRA_DATASOURCE_PASSWORD=your_password
+KESTRA_DATASOURCE_DRIVER=org.postgresql.Driver
+```
+
+**MySQL:**
+```env
+KESTRA_DATASOURCE_URL=jdbc:mysql://localhost:3306/kestra
+KESTRA_DATASOURCE_USERNAME=kestra
+KESTRA_DATASOURCE_PASSWORD=your_password
+KESTRA_DATASOURCE_DRIVER=com.mysql.cj.jdbc.Driver
+```
+
+### Troubleshooting
+
+**Common Issues:**
+
+1. **Port Already in Use**
+   ```bash
+   # Check what's using port 8080
+   lsof -i :8080
+   
+   # Kill the process or use a different port
+   KESTRA_SERVER_PORT=8081 ./gradlew run
+   ```
+
+2. **Node.js Version Issues**
+   ```bash
+   # Use Node Version Manager
+   nvm install 18
+   nvm use 18
+   ```
+
+3. **Java Version Issues**
+   ```bash
+   # Check Java version
+   java -version
+   
+   # Set JAVA_HOME if needed
+   export JAVA_HOME=/path/to/java21
+   ```
+
+4. **Build Failures**
+   ```bash
+   # Clean and rebuild
+   ./gradlew clean build
+   
+   # Skip tests if needed
+   ./gradlew build -x test
+   ```
+
+5. **UI Development Issues**
+   ```bash
+   # Clear npm cache
+   npm cache clean --force
+   
+   # Delete node_modules and reinstall
+   rm -rf node_modules package-lock.json
+   npm install
+   ```
+
+### Development Workflow
+
+1. **Backend Changes**: Restart the Gradle run task
+2. **Frontend Changes**: Hot reload is enabled in development mode
+3. **Database Changes**: Use Flyway migrations in `src/main/resources/migrations/`
+4. **Plugin Development**: Follow the [Plugin Developer Guide](https://kestra.io/docs/plugin-developer-guide/)
+
+### Testing
+
+```bash
+# Run backend tests
+./gradlew test
+
+# Run UI tests
+cd ui && npm test
+
+# Run integration tests
+./gradlew integrationTest
+
+# Run specific test
+./gradlew test --tests "io.kestra.core.services.FlowServiceTest"
+```
+
+### Contributing to Enhanced Features
+
+When contributing to the enhanced features:
+
+1. **Apps/Tests Components**: Located in `ui/src/components/apps/` and `ui/src/components/tests/`
+2. **AI Integration**: Located in `ui/src/services/aiService.ts` and `ui/src/components/ai/`
+3. **API Key Management**: Located in `ui/src/utils/apiKeyStorage.ts`
+4. **Translations**: Add new keys to `ui/src/translations/apps-tests-ai.json`
+
+---
+
 ## 🤝 Contributing
 
 We welcome contributions of all kinds!
@@ -223,4 +493,3 @@ Give our repository a star to stay informed about the latest features and update
 ---
 
 Thank you for considering Kestra for your workflow orchestration needs. We can't wait to see what you'll build!
-
