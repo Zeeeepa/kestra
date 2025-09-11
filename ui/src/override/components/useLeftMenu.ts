@@ -74,9 +74,6 @@ export function useLeftMenu() {
                     element: shallowRef(FormatListGroupPlus),
                     class: "menu-icon",
                 },
-                attributes: {
-                    locked: true,
-                },
             },
             {
                 href: {name: "templates/list"},
@@ -124,9 +121,6 @@ export function useLeftMenu() {
                     element: shallowRef(FlaskOutline),
                     class: "menu-icon"
                 },
-                attributes: {
-                    locked: true,
-                },
             },
             {
                 href: {name: "namespaces/list"},
@@ -154,9 +148,6 @@ export function useLeftMenu() {
                     element: shallowRef(ShieldKeyOutline),
                     class: "menu-icon",
                 },
-                attributes: {
-                    locked: true,
-                },
             },
             {
                 routes: routeStartWith("blueprints"),
@@ -169,9 +160,6 @@ export function useLeftMenu() {
                     {
                         title: t("blueprints.custom"),
                         routes: routeStartWith("blueprints/flow"),
-                        attributes: {
-                            locked: true,
-                        },
                         href: {
                             name: "blueprints",
                             params: {kind: "flow", tab: "custom"},
@@ -216,17 +204,11 @@ export function useLeftMenu() {
                         href: {name: "admin/iam"},
                         routes: routeStartWith("admin/iam"),
                         title: t("iam"),
-                        attributes: {
-                            locked: true,
-                        },
                     },
                     {
                         href: {name: "admin/auditlogs/list"},
                         routes: routeStartWith("admin/auditlogs"),
                         title: t("auditlogs"),
-                        attributes: {
-                            locked: true,
-                        },
                     },
                     {
                         href: {name: "admin/triggers"},
@@ -237,17 +219,11 @@ export function useLeftMenu() {
                         href: {name: "admin/instance"},
                         routes: routeStartWith("admin/instance"),
                         title: t("instance"),
-                        attributes: {
-                            locked: true,
-                        },
                     },
                     {
                         href: {name: "admin/tenants/list"},
                         routes: routeStartWith("admin/tenants"),
                         title: t("tenant.names"),
-                        attributes: {
-                            locked: true,
-                        },
                     },
                     {
                         href: {name: "admin/stats"},

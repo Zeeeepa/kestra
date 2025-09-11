@@ -94,11 +94,11 @@ export default [
     //Errors
     {name: "errors/404-wildcard", path: "/:tenant?/:pathMatch(.*)", component: Errors, props: {code: 404}},
 
-    //Demo Pages
-    {name: "apps/list", path: "/:tenant?/apps", component: DemoApps},
-    {name: "tests/list", path: "/:tenant?/tests", component: DemoTests},
-    {name: "admin/iam", path: "/:tenant?/admin/iam", component: DemoIAM},
+    //Real Implementation Pages
+    {name: "apps/list", path: "/:tenant?/apps", component: () => import("../components/apps/Apps.vue")},
+    {name: "tests/list", path: "/:tenant?/tests", component: () => import("../components/tests/Tests.vue")},
+    {name: "admin/iam", path: "/:tenant?/admin/iam", component: () => import("../components/admin/IAM.vue")},
     {name: "admin/tenants/list", path: "/:tenant?/admin/tenants", component: DemoTenants},
-    {name: "admin/auditlogs/list", path: "/:tenant?/admin/auditlogs", component: DemoAuditLogs},
-    {name: "admin/instance", path: "/:tenant?/admin/instance", component: DemoInstance},
+    {name: "admin/auditlogs/list", path: "/:tenant?/admin/auditlogs", component: () => import("../components/admin/AuditLogs.vue")},
+    {name: "admin/instance", path: "/:tenant?/admin/instance", component: () => import("../components/admin/Instance.vue")},
 ];
