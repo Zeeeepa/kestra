@@ -1,5 +1,5 @@
 <template>
-    <DemoBlueprints v-if="props.tab === 'custom'" />
+    <CustomBlueprints v-if="props.tab === 'custom'" />
     <template v-else>
         <TopNavBar v-if="!props.embed" :title="routeInfo.title" />
         <DottedLayout
@@ -37,7 +37,7 @@
     import DottedLayout from "../../../../components/layout/DottedLayout.vue";
     import BlueprintDetail from "../../../../components/flows/blueprints/BlueprintDetail.vue";
     import BlueprintsBrowser from "./BlueprintsBrowser.vue";
-    import DemoBlueprints from "../../../../components/demo/Blueprints.vue";
+    import CustomBlueprints from "../../../../components/flows/blueprints/CustomBlueprints.vue";
     import useRouteContext from "../../../../mixins/useRouteContext";
 
     import headerImage from "../../../../assets/icons/blueprint.svg";

@@ -1,0 +1,128 @@
+{
+  "en": {
+    "apps": "Apps",
+    "app": "App",
+    "tests": "Tests", 
+    "test": "Test",
+    "ai": {
+      "copilot": "AI Copilot",
+      "generate": "Generate",
+      "refine": "Refine",
+      "explain": "Explain",
+      "chat": "Chat",
+      "send": "Send",
+      "accept": "Accept",
+      "thinking": "AI is thinking...",
+      "generated_yaml": "Generated YAML",
+      "explanation": "Explanation",
+      "suggestions": "Suggestions",
+      "suggestion_accepted": "Suggestion accepted",
+      "copied_to_clipboard": "Copied to clipboard",
+      "placeholder": {
+        "generate": "Describe the flow you want to create...",
+        "refine": "Describe how you want to improve this flow...",
+        "explain": "What would you like me to explain about this flow?",
+        "chat": "Ask me anything about Kestra workflows...",
+        "default": "How can I help you with your workflow?"
+      },
+      "error": {
+        "general": "Sorry, I encountered an error. Please try again.",
+        "generate_flow": "Error generating flow",
+        "refine_flow": "Error refining flow",
+        "add_tasks": "Error adding tasks",
+        "add_triggers": "Error adding triggers",
+        "explain_flow": "Error explaining flow",
+        "optimize_flow": "Error optimizing flow",
+        "generate_tests": "Error generating tests",
+        "generate_docs": "Error generating documentation",
+        "convert_flow": "Error converting flow",
+        "get_suggestions": "Error getting suggestions",
+        "chat": "Error in AI chat"
+      }
+    },
+    "apps": {
+      "empty": {
+        "title": "No apps yet",
+        "description": "Create your first app to get started with custom UI building."
+      },
+      "create_first": "Create your first app",
+      "create": "Create App",
+      "edit": "Edit App",
+      "open": "Open",
+      "last_updated": "Last updated",
+      "name_placeholder": "Enter app name",
+      "description_placeholder": "Describe what this app does",
+      "namespace_placeholder": "Enter namespace",
+      "select_type": "Select app type",
+      "types": {
+        "form": "Form App",
+        "dashboard": "Dashboard App",
+        "workflow-trigger": "Workflow Trigger",
+        "custom": "Custom App"
+      },
+      "created_successfully": "App created successfully",
+      "updated_successfully": "App updated successfully",
+      "deleted_successfully": "App deleted successfully",
+      "execution_started": "App execution started",
+      "delete_confirm": "Are you sure you want to delete app '{name}'?",
+      "delete_multiple_confirm": "Are you sure you want to delete {count} apps?"
+    },
+    "tests": {
+      "total_suites": "Test Suites",
+      "avg_success_rate": "Avg Success Rate",
+      "total_runs": "Total Runs",
+      "running_now": "Running Now",
+      "run_all": "Run All Tests",
+      "run_selected": "Run Selected",
+      "run": "Run Test",
+      "view_results": "View Results",
+      "test_cases": "Test Cases",
+      "success_rate": "Success Rate",
+      "last_run": "Last Run",
+      "execution_started": "Test execution started",
+      "selected_tests_started": "Selected tests started",
+      "running_all_tests": "Running all tests...",
+      "flow_tests_started": "Flow tests started",
+      "generated_successfully": "Tests generated successfully",
+      "created_successfully": "Test suite created successfully",
+      "updated_successfully": "Test suite updated successfully",
+      "deleted_successfully": "Test suite deleted successfully",
+      "delete_confirm": "Are you sure you want to delete test suite '{name}'?",
+      "delete_multiple_confirm": "Are you sure you want to delete {count} test suites?"
+    },
+    "error": {
+      "fetch_apps": "Error fetching apps",
+      "fetch_app": "Error fetching app",
+      "create_app": "Error creating app",
+      "update_app": "Error updating app",
+      "delete_app": "Error deleting app",
+      "execute_app": "Error executing app",
+      "fetch_app_executions": "Error fetching app executions",
+      "fetch_tests": "Error fetching tests",
+      "fetch_test": "Error fetching test",
+      "create_test": "Error creating test",
+      "update_test": "Error updating test",
+      "delete_test": "Error deleting test",
+      "execute_test": "Error executing test",
+      "fetch_test_executions": "Error fetching test executions",
+      "fetch_test_results": "Error fetching test results",
+      "run_flow_tests": "Error running flow tests",
+      "generate_tests": "Error generating tests"
+    },
+    "no_results": {
+      "apps": "No apps found",
+      "tests": "No tests found"
+    },
+    "feature": {
+      "coming_soon": "Feature coming soon"
+    },
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "execute": "Execute",
+    "duplicate": "Duplicate",
+    "never": "Never",
+    "you": "You",
+    "clear": "Clear",
+    "copy": "Copy"
+  }
+}

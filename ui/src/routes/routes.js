@@ -42,6 +42,19 @@ export default [
     {name: "flows/create", path: "/:tenant?/flows/new", component: () => import("../components/flows/FlowCreate.vue")},
     {name: "flows/update", path: "/:tenant?/flows/edit/:namespace/:id/:tab?", component: () => import("../components/flows/FlowRoot.vue")},
 
+    //Apps
+    {name: "apps/list", path: "/:tenant?/apps", component: () => import("../components/apps/Apps.vue")},
+    {name: "apps/search", path: "/:tenant?/apps/search", component: () => import("../components/apps/AppsSearch.vue")},
+    {name: "apps/create", path: "/:tenant?/apps/new", component: () => import("../components/apps/AppCreate.vue")},
+    {name: "apps/update", path: "/:tenant?/apps/edit/:namespace/:id/:tab?", component: () => import("../components/apps/AppRoot.vue")},
+
+    //Tests
+    {name: "tests/list", path: "/:tenant?/tests", component: () => import("../components/tests/Tests.vue")},
+    {name: "tests/search", path: "/:tenant?/tests/search", component: () => import("../components/tests/TestsSearch.vue")},
+    {name: "tests/create", path: "/:tenant?/tests/new", component: () => import("../components/tests/TestCreate.vue")},
+    {name: "tests/update", path: "/:tenant?/tests/edit/:namespace/:id/:tab?", component: () => import("../components/tests/TestRoot.vue")},
+    {name: "tests/results", path: "/:tenant?/tests/:namespace/:id/results", component: () => import("../components/tests/TestResults.vue")},
+
     //Executions
     {name: "executions/list", path: "/:tenant?/executions", component: () => import("../components/executions/Executions.vue")},
     {name: "executions/update", path: "/:tenant?/executions/:namespace/:flowId/:id/:tab?", component: () => import("../components/executions/ExecutionRoot.vue")},

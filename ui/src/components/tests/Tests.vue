@@ -1,422 +1,702 @@
 <template>
-    <TopNavBar :title="routeInfo.title" />
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">{{ $t('demos.tests.header') }}</h5>
-                        <div class="d-flex gap-2">
-                            <el-button @click="runAllTests" :loading="runningAll">
-                                <PlayArrow class="me-2" />
-                                {{ $t('tests.run_all') }}
-                            </el-button>
-                            <el-button type="primary" @click="showCreateDialog = true">
-                                <Plus class="me-2" />
-                                {{ $t('tests.create') }}
-                            </el-button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div v-if="tests.length === 0" class="text-center py-5">
-                            <FlaskOutline class="text-muted mb-3" style="font-size: 4rem;" />
-                            <h6 class="text-muted">{{ $t('tests.empty.title') }}</h6>
-                            <p class="text-muted">{{ $t('tests.empty.description') }}</p>
-                            <el-button type="primary" @click="showCreateDialog = true">
-                                {{ $t('tests.create_first') }}
-                            </el-button>
-                        </div>
-                        <div v-else>
-                            <!-- Test Statistics -->
-                            <div class="row mb-4">
-                                <div class="col-md-3">
-                                    <div class="stat-card text-center p-3 border rounded">
-                                        <div class="stat-number text-primary">{{ testStats.total }}</div>
-                                        <div class="stat-label">{{ $t('tests.total') }}</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="stat-card text-center p-3 border rounded">
-                                        <div class="stat-number text-success">{{ testStats.passed }}</div>
-                                        <div class="stat-label">{{ $t('tests.passed') }}</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="stat-card text-center p-3 border rounded">
-                                        <div class="stat-number text-danger">{{ testStats.failed }}</div>
-                                        <div class="stat-label">{{ $t('tests.failed') }}</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="stat-card text-center p-3 border rounded">
-                                        <div class="stat-number text-warning">{{ testStats.pending }}</div>
-                                        <div class="stat-label">{{ $t('tests.pending') }}</div>
-                                    </div>
-                                </div>
-                            </div>
+    <TopNavBar :title="routeInfo.title">
+        <template #additional-right>
+            <ul>
+                <li>
+                    <el-button :icon="Upload" @click="file?.click()">
+                        {{ $t("import") }}
+                    </el-button>
+                    <input
+                        ref="file"
+                        type="file"
+                        accept=".zip, .yml, .yaml"
+                        @change="importTests()"
+                        class="d-none"
+                    >
+                </li>
+                <li>
+                    <router-link :to="{name: 'tests/search'}">
+                        <el-button :icon="TextBoxSearch">
+                            {{ $t("source search") }}
+                        </el-button>
+                    </router-link>
+                </li>
+                <li>
+                    <el-button :icon="PlayCircle" @click="runAllTests" type="success">
+                        {{ $t("tests.run_all") }}
+                    </el-button>
+                </li>
+                <li>
+                    <router-link
+                        :to="{
+                            name: 'tests/create',
+                            query: {namespace: $route.query.namespace},
+                        }"
+                        v-if="canCreate"
+                    >
+                        <el-button :icon="Plus" type="primary">
+                            {{ $t("create") }}
+                        </el-button>
+                    </router-link>
+                </li>
+            </ul>
+        </template>
+    </TopNavBar>
 
-                            <!-- Tests Table -->
-                            <el-table :data="tests" style="width: 100%">
-                                <el-table-column prop="name" :label="$t('name')" min-width="200">
-                                    <template #default="scope">
-                                        <div class="d-flex align-items-center">
-                                            <FlaskOutline class="me-2 text-muted" />
-                                            {{ scope.row.name }}
-                                        </div>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column prop="flow" :label="$t('flow')" min-width="150" />
-                                <el-table-column prop="namespace" :label="$t('namespace')" width="120" />
-                                <el-table-column prop="status" :label="$t('status')" width="100">
-                                    <template #default="scope">
-                                        <el-tag 
-                                            :type="getStatusType(scope.row.status)"
-                                            size="small"
-                                        >
-                                            {{ $t(`tests.status.${scope.row.status}`) }}
-                                        </el-tag>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column prop="lastRun" :label="$t('tests.last_run')" width="150">
-                                    <template #default="scope">
-                                        <span v-if="scope.row.lastRun">
-                                            {{ formatDate(scope.row.lastRun) }}
-                                        </span>
-                                        <span v-else class="text-muted">{{ $t('never') }}</span>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column prop="duration" :label="$t('tests.duration')" width="100">
-                                    <template #default="scope">
-                                        <span v-if="scope.row.duration">{{ scope.row.duration }}ms</span>
-                                        <span v-else>-</span>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column :label="$t('actions')" width="150">
-                                    <template #default="scope">
-                                        <el-button 
-                                            size="small" 
-                                            @click="runTest(scope.row)"
-                                            :loading="scope.row.running"
-                                        >
-                                            <PlayArrow />
-                                        </el-button>
-                                        <el-dropdown @command="handleTestAction">
-                                            <el-button size="small" text>
-                                                <DotsVertical />
-                                            </el-button>
-                                            <template #dropdown>
-                                                <el-dropdown-menu>
-                                                    <el-dropdown-item :command="{action: 'edit', test: scope.row}">
-                                                        {{ $t('edit') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item :command="{action: 'view', test: scope.row}">
-                                                        {{ $t('tests.view_results') }}
-                                                    </el-dropdown-item>
-                                                    <el-dropdown-item :command="{action: 'delete', test: scope.row}" divided>
-                                                        {{ $t('delete') }}
-                                                    </el-dropdown-item>
-                                                </el-dropdown-menu>
-                                            </template>
-                                        </el-dropdown>
-                                    </template>
-                                </el-table-column>
-                            </el-table>
-                        </div>
+    <!-- Test Statistics Dashboard -->
+    <section class="container mb-4" v-if="ready">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="text-primary">{{ testStore.overallTestStats.total }}</h3>
+                        <p class="mb-0">{{ $t('tests.total_suites') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="text-success">{{ testStore.overallTestStats.avgSuccessRate }}%</h3>
+                        <p class="mb-0">{{ $t('tests.avg_success_rate') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="text-info">{{ testStore.overallTestStats.totalRuns }}</h3>
+                        <p class="mb-0">{{ $t('tests.total_runs') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="text-warning">{{ testStore.testStats.running }}</h3>
+                        <p class="mb-0">{{ $t('tests.running_now') }}</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Create/Edit Test Dialog -->
-    <el-dialog v-model="showCreateDialog" :title="editingTest ? $t('tests.edit') : $t('tests.create')" width="700px">
-        <el-form :model="testForm" label-width="120px">
-            <el-form-item :label="$t('name')" required>
-                <el-input v-model="testForm.name" :placeholder="$t('tests.name_placeholder')" />
-            </el-form-item>
-            <el-form-item :label="$t('description')">
-                <el-input 
-                    v-model="testForm.description" 
-                    type="textarea" 
-                    :rows="2"
-                    :placeholder="$t('tests.description_placeholder')" 
-                />
-            </el-form-item>
-            <el-form-item :label="$t('flow')" required>
-                <el-input v-model="testForm.flow" :placeholder="$t('tests.flow_placeholder')" />
-            </el-form-item>
-            <el-form-item :label="$t('namespace')" required>
-                <el-input v-model="testForm.namespace" :placeholder="$t('tests.namespace_placeholder')" />
-            </el-form-item>
-            <el-form-item :label="$t('tests.test_data')">
-                <el-input 
-                    v-model="testForm.testData" 
-                    type="textarea" 
-                    :rows="6"
-                    :placeholder="$t('tests.test_data_placeholder')" 
-                />
-            </el-form-item>
-            <el-form-item :label="$t('tests.expected_output')">
-                <el-input 
-                    v-model="testForm.expectedOutput" 
-                    type="textarea" 
-                    :rows="4"
-                    :placeholder="$t('tests.expected_output_placeholder')" 
-                />
-            </el-form-item>
-        </el-form>
-        <template #footer>
-            <el-button @click="showCreateDialog = false">{{ $t('cancel') }}</el-button>
-            <el-button type="primary" @click="saveTest">
-                {{ editingTest ? $t('update') : $t('create') }}
-            </el-button>
-        </template>
-    </el-dialog>
+    <section
+        data-component="FILENAME_PLACEHOLDER"
+        :class="{container: true}"
+        v-if="ready"
+    >
+        <div>
+            <DataTable
+                @page-changed="onPageChanged"
+                ref="dataTable"
+                :total="testStore.total"
+                :hideTopPagination="!!namespace"
+            >
+                <template #navbar>
+                    <KestraFilter
+                        prefix="tests"
+                        :language="TestFilterLanguage"
+                        :buttons="{
+                            refresh: {shown: false},
+                            settings: {shown: false}
+                        }"
+                        :properties="{
+                            shown: true,
+                            columns: optionalColumns,
+                            displayColumns,
+                            storageKey: 'tests',
+                        }"
+                        @update-properties="updateDisplayColumns"
+                    />
+                </template>
+
+                <template #table>
+                    <SelectTable
+                        ref="selectTable"
+                        :data="testStore.testSuites"
+                        :defaultSort="{prop: 'name', order: 'ascending'}"
+                        tableLayout="auto"
+                        fixed
+                        @row-dblclick="onRowDoubleClick"
+                        @sort-change="onSort"
+                        :rowClassName="rowClasses"
+                        @selection-change="handleSelectionChange"
+                        :selectable="canCheck"
+                        :no-data-text="$t('no_results.tests')"
+                        class="tests-table"
+                    >
+                        <template #select-actions>
+                            <BulkSelect
+                                :selectAll="queryBulkAction"
+                                :selections="selection"
+                                :total="testStore.total"
+                                @update:select-all="toggleAllSelection"
+                                @unselect="toggleAllUnselected"
+                            >
+                                <el-button
+                                    v-if="canRead"
+                                    :icon="Download"
+                                    @click="exportTests()"
+                                >
+                                    {{ $t("export") }}
+                                </el-button>
+                                <el-button
+                                    v-if="canUpdate"
+                                    :icon="PlayCircle"
+                                    @click="runSelectedTests"
+                                    type="success"
+                                >
+                                    {{ $t("tests.run_selected") }}
+                                </el-button>
+                                <el-button
+                                    v-if="canDelete"
+                                    @click="deleteTests"
+                                    :icon="TrashCan"
+                                >
+                                    {{ $t("delete") }}
+                                </el-button>
+                            </BulkSelect>
+                        </template>
+                        <template #default>
+                            <el-table-column
+                                prop="name"
+                                sortable="custom"
+                                :sortOrders="['ascending', 'descending']"
+                                :label="$t('name')"
+                            >
+                                <template #default="scope">
+                                    <div class="test-name">
+                                        <router-link
+                                            :to="{
+                                                name: 'tests/update',
+                                                params: {
+                                                    namespace: scope.row.namespace,
+                                                    id: scope.row.id,
+                                                },
+                                            }"
+                                            class="me-1"
+                                        >
+                                            {{
+                                                $filters.invisibleSpace(
+                                                    scope.row.name,
+                                                )
+                                            }}
+                                        </router-link>
+                                        <MarkdownTooltip
+                                            :id="
+                                                scope.row.namespace +
+                                                    '-' +
+                                                    scope.row.id
+                                            "
+                                            :description="scope.row.description"
+                                            :title="
+                                                scope.row.namespace +
+                                                    '.' +
+                                                    scope.row.id
+                                            "
+                                        />
+                                    </div>
+                                </template>
+                            </el-table-column>
+
+                            <el-table-column
+                                prop="flowId"
+                                v-if="displayColumn('flowId')"
+                                :label="$t('flow')"
+                                width="200"
+                            >
+                                <template #default="scope">
+                                    <router-link
+                                        :to="{
+                                            name: 'flows/update',
+                                            params: {
+                                                namespace: scope.row.namespace,
+                                                id: scope.row.flowId,
+                                            },
+                                        }"
+                                        class="text-primary"
+                                    >
+                                        {{ scope.row.flowId }}
+                                    </router-link>
+                                </template>
+                            </el-table-column>
+
+                            <el-table-column
+                                v-if="displayColumn('labels')"
+                                :label="$t('labels')"
+                            >
+                                <template #default="scope">
+                                    <Labels :labels="scope.row.labels" />
+                                </template>
+                            </el-table-column>
+
+                            <el-table-column
+                                prop="namespace"
+                                v-if="displayColumn('namespace')"
+                                sortable="custom"
+                                :sortOrders="['ascending', 'descending']"
+                                :label="$t('namespace')"
+                                :formatter="
+                                    (_, __, cellValue) =>
+                                        $filters.invisibleSpace(cellValue)
+                                "
+                            />
+
+                            <el-table-column
+                                prop="testCases"
+                                v-if="displayColumn('testCases')"
+                                :label="$t('tests.test_cases')"
+                                width="100"
+                                align="center"
+                            >
+                                <template #default="scope">
+                                    <el-tag size="small" type="info">
+                                        {{ scope.row.testCases?.length || 0 }}
+                                    </el-tag>
+                                </template>
+                            </el-table-column>
+
+                            <el-table-column
+                                prop="successRate"
+                                v-if="displayColumn('successRate')"
+                                :label="$t('tests.success_rate')"
+                                width="120"
+                                align="center"
+                            >
+                                <template #default="scope">
+                                    <el-progress
+                                        :percentage="Math.round((scope.row.successRate || 0) * 100)"
+                                        :color="getSuccessRateColor(scope.row.successRate)"
+                                        :stroke-width="6"
+                                        text-inside
+                                    />
+                                </template>
+                            </el-table-column>
+
+                            <el-table-column
+                                prop="lastRunDate"
+                                v-if="displayColumn('lastRunDate')"
+                                :label="$t('tests.last_run')"
+                                width="180"
+                            >
+                                <template #default="scope">
+                                    <DateAgo
+                                        v-if="scope.row.lastRunDate"
+                                        :inverted="true"
+                                        :date="scope.row.lastRunDate"
+                                    />
+                                    <span v-else class="text-muted">{{ $t('never') }}</span>
+                                </template>
+                            </el-table-column>
+
+                            <el-table-column
+                                prop="totalRuns"
+                                v-if="displayColumn('totalRuns')"
+                                :label="$t('tests.total_runs')"
+                                width="100"
+                                align="right"
+                            >
+                                <template #default="scope">
+                                    <span class="text-muted">{{ scope.row.totalRuns || 0 }}</span>
+                                </template>
+                            </el-table-column>
+
+                            <el-table-column
+                                prop="updatedAt"
+                                v-if="displayColumn('updatedAt')"
+                                :label="$t('updated')"
+                                width="180"
+                            >
+                                <template #default="scope">
+                                    <DateAgo
+                                        :inverted="true"
+                                        :date="scope.row.updatedAt"
+                                    />
+                                </template>
+                            </el-table-column>
+
+                            <el-table-column :label="$t('actions')" width="80" fixed="right">
+                                <template #default="scope">
+                                    <el-dropdown @command="handleTestAction">
+                                        <el-button size="small" text>
+                                            <DotsVertical />
+                                        </el-button>
+                                        <template #dropdown>
+                                            <el-dropdown-menu>
+                                                <el-dropdown-item :command="{action: 'run', test: scope.row}">
+                                                    <PlayCircle class="me-2" />
+                                                    {{ $t('tests.run') }}
+                                                </el-dropdown-item>
+                                                <el-dropdown-item :command="{action: 'results', test: scope.row}">
+                                                    <ChartLine class="me-2" />
+                                                    {{ $t('tests.view_results') }}
+                                                </el-dropdown-item>
+                                                <el-dropdown-item :command="{action: 'edit', test: scope.row}">
+                                                    <Pencil class="me-2" />
+                                                    {{ $t('edit') }}
+                                                </el-dropdown-item>
+                                                <el-dropdown-item :command="{action: 'duplicate', test: scope.row}">
+                                                    <ContentDuplicate class="me-2" />
+                                                    {{ $t('duplicate') }}
+                                                </el-dropdown-item>
+                                                <el-dropdown-item :command="{action: 'delete', test: scope.row}" divided>
+                                                    <TrashCan class="me-2" />
+                                                    {{ $t('delete') }}
+                                                </el-dropdown-item>
+                                            </el-dropdown-menu>
+                                        </template>
+                                    </el-dropdown>
+                                </template>
+                            </el-table-column>
+                        </template>
+                    </SelectTable>
+                </template>
+            </DataTable>
+        </div>
+    </section>
 </template>
 
 <script setup lang="ts">
-    import {ref, computed, onMounted} from "vue";
+    import {ref, computed, onMounted, watch} from "vue";
     import {useI18n} from "vue-i18n";
+    import {useRoute, useRouter} from "vue-router";
     import {ElMessage, ElMessageBox} from "element-plus";
+    
+    // Components
     import TopNavBar from "../layout/TopNavBar.vue";
+    import DataTable from "../layout/DataTable.vue";
+    import SelectTable from "../layout/SelectTable.vue";
+    import BulkSelect from "../layout/BulkSelect.vue";
+    import KestraFilter from "../filter/KestraFilter.vue";
+    import Labels from "../misc/Labels.vue";
+    import DateAgo from "../misc/DateAgo.vue";
+    import MarkdownTooltip from "../misc/MarkdownTooltip.vue";
+    
+    // Icons
     import Plus from "vue-material-design-icons/Plus.vue";
-    import PlayArrow from "vue-material-design-icons/PlayArrow.vue";
-    import FlaskOutline from "vue-material-design-icons/FlaskOutline.vue";
+    import Upload from "vue-material-design-icons/Upload.vue";
+    import Download from "vue-material-design-icons/Download.vue";
+    import TextBoxSearch from "vue-material-design-icons/TextBoxSearch.vue";
     import DotsVertical from "vue-material-design-icons/DotsVertical.vue";
+    import PlayCircle from "vue-material-design-icons/PlayCircle.vue";
+    import ChartLine from "vue-material-design-icons/ChartLine.vue";
+    import Pencil from "vue-material-design-icons/Pencil.vue";
+    import ContentDuplicate from "vue-material-design-icons/ContentDuplicate.vue";
+    import TrashCan from "vue-material-design-icons/TrashCan.vue";
+    
+    // Stores and composables
+    import {useTestStore} from "../../stores/test";
+    import {useCoreStore} from "../../stores/core";
+    import {useAuthStore} from "override/stores/auth";
     import useRouteContext from "../../mixins/useRouteContext";
+    import permission from "../../models/permission";
+    import action from "../../models/action";
+    
+    // Filter language
+    import {TestFilterLanguage} from "../../composables/monaco/languages/filters/testFilterLanguage";
 
     const {t} = useI18n();
+    const route = useRoute();
+    const router = useRouter();
+    const testStore = useTestStore();
+    const coreStore = useCoreStore();
+    const authStore = useAuthStore();
 
+    // Route context
     const routeInfo = ref({
-        title: t("demos.tests.header"),
+        title: t("tests"),
     });
-
     useRouteContext(routeInfo);
 
-    // Reactive data
-    const tests = ref([
-        {
-            id: 1,
-            name: "Customer Data Validation",
-            description: "Test customer data processing flow",
-            flow: "customer-processing",
-            namespace: "customer",
-            status: "passed",
-            lastRun: new Date('2024-01-15T10:30:00'),
-            duration: 1250,
-            running: false
-        },
-        {
-            id: 2,
-            name: "Payment Processing Test",
-            description: "Validate payment workflow",
-            flow: "payment-flow",
-            namespace: "finance",
-            status: "failed",
-            lastRun: new Date('2024-01-14T15:45:00'),
-            duration: 890,
-            running: false
-        },
-        {
-            id: 3,
-            name: "Data Export Validation",
-            description: "Test data export functionality",
-            flow: "data-export",
-            namespace: "data",
-            status: "pending",
-            lastRun: null,
-            duration: null,
-            running: false
-        }
-    ]);
+    // Reactive state
+    const ready = ref(false);
+    const namespace = computed(() => route.query.namespace as string);
+    const file = ref<HTMLInputElement>();
+    const dataTable = ref();
+    const selectTable = ref();
+    const selection = ref([]);
 
-    const showCreateDialog = ref(false);
-    const editingTest = ref(null);
-    const runningAll = ref(false);
-    const testForm = ref({
-        name: '',
-        description: '',
-        flow: '',
-        namespace: '',
-        testData: '',
-        expectedOutput: ''
+    // Display columns configuration
+    const optionalColumns = [
+        { key: "flowId", label: t("flow") },
+        { key: "labels", label: t("labels") },
+        { key: "namespace", label: t("namespace") },
+        { key: "testCases", label: t("tests.test_cases") },
+        { key: "successRate", label: t("tests.success_rate") },
+        { key: "lastRunDate", label: t("tests.last_run") },
+        { key: "totalRuns", label: t("tests.total_runs") },
+        { key: "updatedAt", label: t("updated") },
+    ];
+
+    const displayColumns = ref(
+        JSON.parse(localStorage.getItem("tests-display-columns") || JSON.stringify([
+            "flowId", "namespace", "testCases", "successRate", "lastRunDate", "totalRuns", "updatedAt"
+        ]))
+    );
+
+    // Computed properties
+    const canCreate = computed(() => {
+        return authStore.user?.isAllowed(permission.TEST, action.CREATE, namespace.value);
     });
 
-    // Computed
-    const testStats = computed(() => {
-        const total = tests.value.length;
-        const passed = tests.value.filter(t => t.status === 'passed').length;
-        const failed = tests.value.filter(t => t.status === 'failed').length;
-        const pending = tests.value.filter(t => t.status === 'pending').length;
-        
-        return { total, passed, failed, pending };
+    const canRead = computed(() => {
+        return authStore.user?.isAllowed(permission.TEST, action.READ, namespace.value);
+    });
+
+    const canUpdate = computed(() => {
+        return authStore.user?.isAllowed(permission.TEST, action.UPDATE, namespace.value);
+    });
+
+    const canDelete = computed(() => {
+        return authStore.user?.isAllowed(permission.TEST, action.DELETE, namespace.value);
+    });
+
+    const canCheck = computed(() => {
+        return canUpdate.value || canDelete.value;
+    });
+
+    const queryBulkAction = computed(() => {
+        return route.query.bulk === "true";
     });
 
     // Methods
-    function getStatusType(status: string) {
-        switch (status) {
-            case 'passed': return 'success';
-            case 'failed': return 'danger';
-            case 'pending': return 'warning';
-            default: return 'info';
+    function displayColumn(column: string) {
+        return displayColumns.value.includes(column);
+    }
+
+    function updateDisplayColumns(columns: string[]) {
+        displayColumns.value = columns;
+        localStorage.setItem("tests-display-columns", JSON.stringify(columns));
+    }
+
+    function getSuccessRateColor(rate: number) {
+        if (rate >= 0.9) return '#67c23a';
+        if (rate >= 0.7) return '#e6a23c';
+        return '#f56c6c';
+    }
+
+    function rowClasses({row}: {row: any}) {
+        const classes = [];
+        if (row.successRate < 0.5) {
+            classes.push('test-failing');
+        }
+        return classes.join(' ');
+    }
+
+    async function onPageChanged(stats: any) {
+        await loadTests({
+            page: stats.page,
+            size: stats.size,
+            sort: stats.sort,
+            q: stats.q
+        });
+    }
+
+    function onRowDoubleClick(row: any) {
+        router.push({
+            name: "tests/update",
+            params: {
+                namespace: row.namespace,
+                id: row.id,
+            },
+        });
+    }
+
+    async function onSort({prop, order}: {prop: string, order: string}) {
+        const sort = order === 'ascending' ? `${prop}:asc` : `${prop}:desc`;
+        await loadTests({
+            sort,
+            page: 1
+        });
+    }
+
+    function handleSelectionChange(val: any[]) {
+        selection.value = val;
+    }
+
+    function toggleAllSelection(selectAll: boolean) {
+        if (selectAll) {
+            selectTable.value?.toggleAllSelection();
+        } else {
+            selectTable.value?.clearSelection();
         }
     }
 
-    function formatDate(date: Date) {
-        return new Intl.DateTimeFormat('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        }).format(date);
+    function toggleAllUnselected() {
+        selectTable.value?.clearSelection();
+    }
+
+    async function handleTestAction({action: actionType, test}: {action: string, test: any}) {
+        switch (actionType) {
+            case 'run':
+                await runTest(test);
+                break;
+            case 'results':
+                router.push({
+                    name: "tests/results",
+                    params: {
+                        namespace: test.namespace,
+                        id: test.id,
+                    },
+                });
+                break;
+            case 'edit':
+                router.push({
+                    name: "tests/update",
+                    params: {
+                        namespace: test.namespace,
+                        id: test.id,
+                    },
+                });
+                break;
+            case 'duplicate':
+                router.push({
+                    name: "tests/create",
+                    query: {
+                        copy: true,
+                        namespace: test.namespace,
+                        id: test.id,
+                    },
+                });
+                break;
+            case 'delete':
+                await deleteTest(test);
+                break;
+        }
     }
 
     async function runTest(test: any) {
-        test.running = true;
-        ElMessage.info(`Running test: ${test.name}`);
-        
-        // Simulate test execution
-        setTimeout(() => {
-            test.running = false;
-            test.lastRun = new Date();
-            test.duration = Math.floor(Math.random() * 2000) + 500;
-            test.status = Math.random() > 0.3 ? 'passed' : 'failed';
-            
-            ElMessage.success(`Test completed: ${test.name}`);
-        }, 2000);
-    }
-
-    async function runAllTests() {
-        runningAll.value = true;
-        ElMessage.info('Running all tests...');
-        
-        // Simulate running all tests
-        setTimeout(() => {
-            tests.value.forEach(test => {
-                test.lastRun = new Date();
-                test.duration = Math.floor(Math.random() * 2000) + 500;
-                test.status = Math.random() > 0.2 ? 'passed' : 'failed';
-            });
-            
-            runningAll.value = false;
-            ElMessage.success('All tests completed');
-        }, 3000);
-    }
-
-    function handleTestAction(command: any) {
-        if (command.action === 'edit') {
-            editTest(command.test);
-        } else if (command.action === 'delete') {
-            deleteTest(command.test);
-        } else if (command.action === 'view') {
-            viewTestResults(command.test);
+        try {
+            await testStore.executeTestSuite(test.namespace, test.id);
+            ElMessage.success(t("tests.execution_started"));
+        } catch (error) {
+            console.error("Error running test:", error);
         }
     }
 
-    function editTest(test: any) {
-        editingTest.value = test;
-        testForm.value = { ...test };
-        showCreateDialog.value = true;
+    async function runAllTests() {
+        try {
+            ElMessage.info(t("tests.running_all_tests"));
+            // Implementation for running all tests
+        } catch (error) {
+            console.error("Error running all tests:", error);
+        }
     }
 
-    function viewTestResults(test: any) {
-        ElMessage.info(`Viewing results for: ${test.name}`);
-        // TODO: Implement test results view
+    async function runSelectedTests() {
+        if (selection.value.length === 0) return;
+
+        try {
+            for (const test of selection.value) {
+                await testStore.executeTestSuite(test.namespace, test.id);
+            }
+            ElMessage.success(t("tests.selected_tests_started"));
+        } catch (error) {
+            console.error("Error running selected tests:", error);
+        }
     }
 
     async function deleteTest(test: any) {
         try {
             await ElMessageBox.confirm(
-                t('tests.delete_confirm', { name: test.name }),
-                t('confirm'),
+                t("tests.delete_confirm", {name: test.name}),
+                t("delete"),
                 {
-                    confirmButtonText: t('delete'),
-                    cancelButtonText: t('cancel'),
-                    type: 'warning',
+                    confirmButtonText: t("delete"),
+                    cancelButtonText: t("cancel"),
+                    type: "warning",
                 }
             );
-            
-            const index = tests.value.findIndex(t => t.id === test.id);
-            if (index > -1) {
-                tests.value.splice(index, 1);
-                ElMessage.success(t('tests.deleted_success'));
+
+            await testStore.deleteTestSuite(test.namespace, test.id);
+            await loadTests();
+        } catch (error) {
+            if (error !== "cancel") {
+                console.error("Error deleting test:", error);
             }
-        } catch {
-            // User cancelled
         }
     }
 
-    function saveTest() {
-        if (!testForm.value.name.trim()) {
-            ElMessage.error(t('tests.name_required'));
-            return;
-        }
+    async function deleteTests() {
+        if (selection.value.length === 0) return;
 
-        if (editingTest.value) {
-            // Update existing test
-            const index = tests.value.findIndex(t => t.id === editingTest.value.id);
-            if (index > -1) {
-                tests.value[index] = { 
-                    ...tests.value[index], 
-                    ...testForm.value,
-                    status: 'pending',
-                    lastRun: null,
-                    duration: null
-                };
-                ElMessage.success(t('tests.updated_success'));
+        try {
+            await ElMessageBox.confirm(
+                t("tests.delete_multiple_confirm", {count: selection.value.length}),
+                t("delete"),
+                {
+                    confirmButtonText: t("delete"),
+                    cancelButtonText: t("cancel"),
+                    type: "warning",
+                }
+            );
+
+            for (const test of selection.value) {
+                await testStore.deleteTestSuite(test.namespace, test.id);
             }
-        } else {
-            // Create new test
-            const newTest = {
-                id: Date.now(),
-                ...testForm.value,
-                status: 'pending',
-                lastRun: null,
-                duration: null,
-                running: false
-            };
-            tests.value.push(newTest);
-            ElMessage.success(t('tests.created_success'));
-        }
 
-        showCreateDialog.value = false;
-        editingTest.value = null;
-        testForm.value = {
-            name: '',
-            description: '',
-            flow: '',
-            namespace: '',
-            testData: '',
-            expectedOutput: ''
-        };
+            await loadTests();
+            selectTable.value?.clearSelection();
+        } catch (error) {
+            if (error !== "cancel") {
+                console.error("Error deleting tests:", error);
+            }
+        }
     }
 
-    onMounted(() => {
-        // TODO: Load tests from API
+    async function exportTests() {
+        // Implementation for export
+        ElMessage.info(t("feature.coming_soon"));
+    }
+
+    async function importTests() {
+        // Implementation for import
+        ElMessage.info(t("feature.coming_soon"));
+    }
+
+    async function loadTests(options: any = {}) {
+        try {
+            await testStore.findTestSuites({
+                ...options,
+                namespace: namespace.value
+            });
+        } catch (error) {
+            console.error("Error loading tests:", error);
+        }
+    }
+
+    // Lifecycle
+    onMounted(async () => {
+        await loadTests();
+        ready.value = true;
+    });
+
+    // Watchers
+    watch(() => route.query, async () => {
+        await loadTests();
     });
 </script>
 
 <style lang="scss" scoped>
+    .tests-table {
+        .test-name {
+            display: flex;
+            align-items: center;
+        }
+
+        .test-failing {
+            background-color: rgba(245, 108, 108, 0.1);
+        }
+    }
+
     .card {
         border: 1px solid var(--ks-border-primary);
         border-radius: 8px;
         
-        .card-header {
-            background-color: var(--ks-background-secondary);
-            border-bottom: 1px solid var(--ks-border-primary);
-        }
-    }
-
-    .stat-card {
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--ks-content-secondary);
+        .card-body {
+            padding: 1.5rem;
         }
     }
 </style>
+
