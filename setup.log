@@ -1,0 +1,851 @@
+[0;35m🚀 Kestra Enterprise Features - Complete System Setup[0m
+[0;35m=====================================================[0m
+[0;34mSystem: linux | Date: Thu Sep 11 09:50:36 UTC 2025[0m
+
+[0;36m[1/10] (10%) Checking system prerequisites...[0m
+[0;31m[MISSING][0m Java not found
+[1;33m[INFO][0m Installing missing dependencies...
+[0;34m[INFO][0m Detected Linux/WSL system
+[0;31m[MISSING][0m Java not found
+[0;34m[INFO][0m Installing OpenJDK 21...
+[0;31m[ERROR][0m Setup failed at step: Java installation
+[1;33m[INFO][0m Check setup.log for details
+[0;35m🚀 Kestra Enterprise Features - Complete System Setup[0m
+[0;35m=====================================================[0m
+[0;34mSystem: linux | Date: Thu Sep 11 13:54:27 UTC 2025[0m
+
+[0;36m[1/10] (10%) Checking system prerequisites...[0m
+[0;31m[MISSING][0m Java not found
+[1;33m[INFO][0m Installing missing dependencies...
+[0;34m[INFO][0m Detected Linux/WSL system
+[0;31m[MISSING][0m Java not found
+[0;34m[INFO][0m Installing OpenJDK 21...
+[0;32m[SUCCESS][0m OpenJDK 17 installed (fallback)
+[0;32m[SUCCESS][0m Node.js v22 found
+[1;33m[WARNING][0m Java 17 found, but Java 21+ required
+[0;31m[ERROR][0m Setup failed at step: Dependency verification
+[1;33m[INFO][0m Check setup.log for details
+[0;35m🚀 Kestra Enterprise Features - Complete System Setup[0m
+[0;35m=====================================================[0m
+[0;34mSystem: linux | Date: Thu Sep 11 13:55:57 UTC 2025[0m
+
+[0;36m[1/10] (10%) Checking system prerequisites...[0m
+[0;32m[SUCCESS][0m Java 17 found
+[0;32m[SUCCESS][0m Node.js v22 found
+[0;32m[SUCCESS][0m Java 17 found
+[0;32m[SUCCESS][0m Node.js v22 found
+[0;36m[2/10] (20%) Setting up environment...[0m
+[0;36m[3/10] (30%) Managing ports and processes...[0m
+[1;33m[WARNING][0m Port 3000 is in use by frontend
+[0;34m[INFO][0m Stopping processes on port 3000: 284
+285
+286
+287
+[0;36m[4/10] (40%) Setting up Kestra backend...[0m
+[0;34m[INFO][0m Building Kestra backend...
+Downloading https://services.gradle.org/distributions/gradle-8.13-bin.zip
+.............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%.............100%
+
+Welcome to Gradle 8.13!
+
+Here are the highlights of this release:
+ - Daemon JVM auto-provisioning
+ - Enhancements for Scala plugin and JUnit testing
+ - Improvements for build authors and plugin developers
+
+For more details see https://docs.gradle.org/8.13/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :processor:processResources
+> Task :cli:processResources
+> Task :core:copyGradleProperties
+> Task :core:processResources
+> Task :executor:processResources NO-SOURCE
+> Task :jdbc:processResources NO-SOURCE
+> Task :jdbc-h2:processResources
+> Task :jdbc-mysql:processResources
+> Task :jdbc-postgres:processResources
+> Task :repository-memory:processResources NO-SOURCE
+> Task :runner-memory:processResources NO-SOURCE
+> Task :scheduler:processResources NO-SOURCE
+> Task :script:processResources
+> Task :storage-local:processResources NO-SOURCE
+> Task :model:compileJava FAILED
+> Task :generateGitProperties
+> Task :ui:nodeSetup
+
+[Incubating] Problems report is available at: file:///tmp/Zeeeepa/kestra/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':model:compileJava'.
+> error: invalid source release: 21
+
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.13/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 2s
+11 actionable tasks: 11 executed
+[0;31m[ERROR][0m Setup failed at step: Backend build
+[1;33m[INFO][0m Check setup.log for details
+[0;35m🚀 Kestra Enterprise Features - Complete System Setup[0m
+[0;35m=====================================================[0m
+[0;34mSystem: linux | Date: Thu Sep 11 13:58:42 UTC 2025[0m
+
+[0;36m[1/10] (10%) Checking system prerequisites...[0m
+[0;32m[SUCCESS][0m Java 17 found
+[0;32m[SUCCESS][0m Node.js v22 found
+[0;32m[SUCCESS][0m Java 17 found
+[0;32m[SUCCESS][0m Node.js v22 found
+[0;36m[2/10] (20%) Setting up environment...[0m
+[0;36m[3/10] (30%) Managing ports and processes...[0m
+[1;33m[WARNING][0m Port 3000 is in use by frontend
+[0;34m[INFO][0m Stopping processes on port 3000: 8989
+8990
+8991
+8992
+[0;36m[4/10] (40%) Setting up Kestra backend...[0m
+[0;34m[INFO][0m Building Kestra backend...
+> Task :generateGitProperties UP-TO-DATE
+> Task :processor:processResources UP-TO-DATE
+> Task :processResources NO-SOURCE
+> Task :cli:processResources UP-TO-DATE
+> Task :executor:processResources NO-SOURCE
+> Task :jdbc:processResources NO-SOURCE
+> Task :core:copyGradleProperties UP-TO-DATE
+> Task :jdbc-h2:processResources UP-TO-DATE
+> Task :jdbc-mysql:processResources UP-TO-DATE
+> Task :core:processResources UP-TO-DATE
+> Task :repository-memory:processResources NO-SOURCE
+> Task :runner-memory:processResources NO-SOURCE
+> Task :scheduler:processResources NO-SOURCE
+> Task :script:processResources UP-TO-DATE
+> Task :storage-local:processResources NO-SOURCE
+> Task :jdbc-postgres:processResources UP-TO-DATE
+> Task :worker:processResources NO-SOURCE
+> Task :sourcesJar
+> Task :cli:check
+> Task :core:check
+> Task :e2e-tests:compileJava NO-SOURCE
+> Task :ui:nodeSetup UP-TO-DATE
+> Task :e2e-tests:processResources NO-SOURCE
+> Task :e2e-tests:classes UP-TO-DATE
+> Task :ui:npmSetup SKIPPED
+> Task :e2e-tests:jar
+> Task :e2e-tests:assemble
+> Task :e2e-tests:check
+> Task :e2e-tests:build
+> Task :executor:check
+> Task :jdbc:check
+> Task :jdbc-h2:check
+> Task :jdbc-mysql:check
+> Task :jdbc-postgres:check
+> Task :jmh-benchmarks:compileJava NO-SOURCE
+> Task :jmh-benchmarks:copyGradleProperties
+> Task :jmh-benchmarks:processResources
+> Task :jmh-benchmarks:classes
+> Task :jmh-benchmarks:jar
+> Task :jmh-benchmarks:assemble
+> Task :jmh-benchmarks:check
+> Task :jmh-benchmarks:build
+> Task :platform:assemble UP-TO-DATE
+> Task :platform:check UP-TO-DATE
+> Task :platform:build UP-TO-DATE
+> Task :processor:check
+> Task :repository-memory:check
+> Task :runner-memory:check
+> Task :scheduler:check
+> Task :script:check
+> Task :storage-local:check
+> Task :tests:processResources NO-SOURCE
+> Task :tests:check
+> Task :webserver:check
+> Task :worker:check
+> Task :model:compileJava
+> Task :model:processResources NO-SOURCE
+> Task :model:classes
+> Task :processor:compileJava
+> Task :processor:classes
+> Task :ui:npmInstall
+> Task :model:jar
+> Task :processor:jar
+> Task :model:assemble
+> Task :model:check
+> Task :model:build
+> Task :processor:assemble
+> Task :processor:build
+
+> Task :core:compileJava
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/services/AbstractFilterService.java:19: error: patterns in switch statements are a preview feature and are disabled by default.
+                    case Contains<F> f -> contains(finalQuery.get(), fieldsMapping.get(f.getField()), f);
+                         ^
+  (use --enable-preview to enable patterns in switch statements)
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/kv/KVType.java:21: error: patterns in switch statements are a preview feature and are disabled by default.
+                case String ignored -> STRING;
+                     ^
+  (use --enable-preview to enable patterns in switch statements)
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/executions/Variables.java:222: error: patterns in switch statements are a preview feature and are disabled by default.
+                    case InMemoryVariables inMemory -> {
+                         ^
+  (use --enable-preview to enable patterns in switch statements)
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/expression/InExpression.java:30: error: patterns in switch statements are a preview feature and are disabled by default.
+            case Collection<?> objects -> {
+                 ^
+  (use --enable-preview to enable patterns in switch statements)
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/plugins/PluginScanner.java:133: error: patterns in switch statements are a preview feature and are disabled by default.
+                    case Task task -> {
+                         ^
+  (use --enable-preview to enable patterns in switch statements)
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/HttpRequest.java:319: error: patterns in switch statements are a preview feature and are disabled by default.
+                    case File fileValue -> builder.addPart(
+                         ^
+  (use --enable-preview to enable patterns in switch statements)
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: patterns in switch statements are a preview feature and are disabled by default.
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                 ^
+  (use --enable-preview to enable patterns in switch statements)
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: : or -> expected
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                             ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: not a statement
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                              ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: ';' expected
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                  ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: not a statement
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                   ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: ';' expected
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                                                           ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: not a statement
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                                                                    ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: ';' expected
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                                                                       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: not a statement
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                                                                         ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: : or -> expected
+            case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                             ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: not a statement
+            case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                              ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: ';' expected
+            case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                                  ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: not a statement
+            case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                                                   ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: ';' expected
+            case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                                                                                       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:135: error: : or -> expected
+            case Enum<?> enumValue when enumClass.isInstance(enumValue) -> List.of(enumClass.cast(enumValue));
+                                  ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:135: error: ';' expected
+            case Enum<?> enumValue when enumClass.isInstance(enumValue) -> List.of(enumClass.cast(enumValue));
+                                                 ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:135: error: ';' expected
+            case Enum<?> enumValue when enumClass.isInstance(enumValue) -> List.of(enumClass.cast(enumValue));
+                                                                       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/dashboard/chart/TimeSeries.java:32: warning: [text-blocks] trailing white space will be removed
+            code = { """
+                     ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/dashboard/chart/Markdown.java:28: warning: [text-blocks] trailing white space will be removed
+            code = { """
+                     ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/condition/Expression.java:35: warning: [text-blocks] trailing white space will be removed
+            code = """
+                   ^
+23 errors
+3 warnings
+
+> Task :core:compileJava FAILED
+
+> Task :ui:npmInstall
+
+> kestra@0.0.0 postinstall
+> patch-package
+
+patch-package 8.0.0
+Applying patches...
+monaco-yaml@5.3.1 ???
+patch-package@8.0.0 ???
+
+> kestra@0.0.0 prepare
+> cd .. && husky ui/.husky && rm -f .git/hooks/*
+
+
+up to date, audited 1634 packages in 7s
+
+346 packages are looking for funding
+  run `npm fund` for details
+
+2 low severity vulnerabilities
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+
+[Incubating] Problems report is available at: file:///tmp/Zeeeepa/kestra/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:compileJava'.
+> Compilation failed; see the compiler output below.
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/services/AbstractFilterService.java:19: error: patterns in switch statements are a preview feature and are disabled by default.
+                      case Contains<F> f -> contains(finalQuery.get(), fieldsMapping.get(f.getField()), f);
+                           ^
+    (use --enable-preview to enable patterns in switch statements)
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/kv/KVType.java:21: error: patterns in switch statements are a preview feature and are disabled by default.
+                  case String ignored -> STRING;
+                       ^
+    (use --enable-preview to enable patterns in switch statements)
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/executions/Variables.java:222: error: patterns in switch statements are a preview feature and are disabled by default.
+                      case InMemoryVariables inMemory -> {
+                           ^
+    (use --enable-preview to enable patterns in switch statements)
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/expression/InExpression.java:30: error: patterns in switch statements are a preview feature and are disabled by default.
+              case Collection<?> objects -> {
+                   ^
+    (use --enable-preview to enable patterns in switch statements)
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/plugins/PluginScanner.java:133: error: patterns in switch statements are a preview feature and are disabled by default.
+                      case Task task -> {
+                           ^
+    (use --enable-preview to enable patterns in switch statements)
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/HttpRequest.java:319: error: patterns in switch statements are a preview feature and are disabled by default.
+                      case File fileValue -> builder.addPart(
+                           ^
+    (use --enable-preview to enable patterns in switch statements)
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: patterns in switch statements are a preview feature and are disabled by default.
+              case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                   ^
+    (use --enable-preview to enable patterns in switch statements)
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: : or -> expected
+              case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                               ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: not a statement
+              case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: ';' expected
+              case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                    ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: not a statement
+              case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                     ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: ';' expected
+              case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                                                             ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: not a statement
+              case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                                                                      ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: ';' expected
+              case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                                                                         ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: error: not a statement
+              case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                                                                           ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: : or -> expected
+              case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                               ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: not a statement
+              case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                                ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: ';' expected
+              case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                                    ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: not a statement
+              case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                                                     ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:133: error: ';' expected
+              case List<?> list when !list.isEmpty() && list.getFirst() instanceof String ->
+                                                                                         ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:135: error: : or -> expected
+              case Enum<?> enumValue when enumClass.isInstance(enumValue) -> List.of(enumClass.cast(enumValue));
+                                    ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:135: error: ';' expected
+              case Enum<?> enumValue when enumClass.isInstance(enumValue) -> List.of(enumClass.cast(enumValue));
+                                                   ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:135: error: ';' expected
+              case Enum<?> enumValue when enumClass.isInstance(enumValue) -> List.of(enumClass.cast(enumValue));
+                                                                         ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/dashboard/chart/TimeSeries.java:32: warning: [text-blocks] trailing white space will be removed
+              code = { """
+                       ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/dashboard/chart/Markdown.java:28: warning: [text-blocks] trailing white space will be removed
+              code = { """
+                       ^
+  /tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/condition/Expression.java:35: warning: [text-blocks] trailing white space will be removed
+              code = """
+                     ^
+  23 errors
+  3 warnings
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.13/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 10s
+21 actionable tasks: 11 executed, 10 up-to-date
+[0;31m[ERROR][0m Setup failed at step: Backend build
+[1;33m[INFO][0m Check setup.log for details
+[0;35m🚀 Kestra Enterprise Features - Complete System Setup[0m
+[0;35m=====================================================[0m
+[0;34mSystem: linux | Date: Thu Sep 11 14:01:36 UTC 2025[0m
+
+[0;36m[1/10] (10%) Checking system prerequisites...[0m
+[0;32m[SUCCESS][0m Java 21 found
+[0;32m[SUCCESS][0m Node.js v22 found
+[0;32m[SUCCESS][0m Java 21 found
+[0;32m[SUCCESS][0m Node.js v22 found
+[0;36m[2/10] (20%) Setting up environment...[0m
+[0;36m[3/10] (30%) Managing ports and processes...[0m
+[1;33m[WARNING][0m Port 3000 is in use by frontend
+[0;34m[INFO][0m Stopping processes on port 3000: 14822
+14823
+14824
+14825
+[0;36m[4/10] (40%) Setting up Kestra backend...[0m
+[0;34m[INFO][0m Building Kestra backend...
+Starting a Gradle Daemon, 1 incompatible Daemon could not be reused, use --status for details
+> Task :generateGitProperties UP-TO-DATE
+> Task :processResources NO-SOURCE
+> Task :processor:processResources
+> Task :cli:processResources
+> Task :executor:processResources NO-SOURCE
+> Task :jdbc:processResources NO-SOURCE
+> Task :core:copyGradleProperties
+> Task :jdbc-h2:processResources
+> Task :jdbc-mysql:processResources
+> Task :core:processResources
+> Task :repository-memory:processResources NO-SOURCE
+> Task :runner-memory:processResources NO-SOURCE
+> Task :scheduler:processResources NO-SOURCE
+> Task :script:processResources
+> Task :storage-local:processResources NO-SOURCE
+> Task :jdbc-postgres:processResources
+> Task :worker:processResources NO-SOURCE
+> Task :sourcesJar
+> Task :cli:check
+> Task :core:check
+> Task :e2e-tests:compileJava NO-SOURCE
+> Task :e2e-tests:processResources NO-SOURCE
+> Task :e2e-tests:classes UP-TO-DATE
+> Task :ui:nodeSetup UP-TO-DATE
+> Task :ui:npmSetup SKIPPED
+> Task :e2e-tests:jar
+> Task :e2e-tests:assemble
+> Task :e2e-tests:check
+> Task :e2e-tests:build
+> Task :executor:check
+> Task :jdbc:check
+> Task :jdbc-h2:check
+> Task :jdbc-mysql:check
+> Task :jdbc-postgres:check
+> Task :jmh-benchmarks:compileJava NO-SOURCE
+> Task :jmh-benchmarks:copyGradleProperties
+> Task :jmh-benchmarks:processResources
+> Task :jmh-benchmarks:classes
+> Task :jmh-benchmarks:jar
+> Task :jmh-benchmarks:assemble
+> Task :jmh-benchmarks:check
+> Task :jmh-benchmarks:build
+> Task :platform:assemble UP-TO-DATE
+> Task :platform:check UP-TO-DATE
+> Task :platform:build UP-TO-DATE
+> Task :processor:check
+> Task :repository-memory:check
+> Task :runner-memory:check
+> Task :scheduler:check
+> Task :script:check
+> Task :storage-local:check
+> Task :tests:processResources NO-SOURCE
+> Task :tests:check
+> Task :webserver:check
+> Task :worker:check
+> Task :model:compileJava
+> Task :model:processResources NO-SOURCE
+> Task :model:classes
+> Task :processor:compileJava
+> Task :processor:classes
+> Task :processor:jar
+> Task :processor:assemble
+> Task :processor:build
+> Task :model:jar
+> Task :model:assemble
+> Task :model:check
+> Task :model:build
+> Task :ui:npmInstall UP-TO-DATE
+
+> Task :ui:assembleFrontend
+
+> kestra@0.0.0 build
+> vite build --emptyOutDir
+
+vite v6.3.6 building for production...
+transforming...
+
+> Task :core:compileJava
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/dashboard/chart/TimeSeries.java:32: warning: [text-blocks] trailing white space will be removed
+            code = { """
+                     ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/dashboard/chart/Markdown.java:28: warning: [text-blocks] trailing white space will be removed
+            code = { """
+                     ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/condition/Expression.java:35: warning: [text-blocks] trailing white space will be removed
+            code = """
+                   ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/flows/FlowInterface.java:139: warning: [deprecation] setSerializationInclusion(Include) in ObjectMapper has been deprecated
+            .setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+            ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/flows/Flow.java:52: warning: [deprecation] setSerializationInclusion(Include) in ObjectMapper has been deprecated
+        .setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+        ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/flows/Type.java:12: warning: [deprecation] EnumInput in io.kestra.core.models.flows.input has been deprecated
+    ENUM(EnumInput.class.getName()),
+         ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/flows/Type.java:16: warning: [deprecation] BooleanInput in io.kestra.core.models.flows.input has been deprecated
+    BOOLEAN(BooleanInput.class.getName()),
+            ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/property/Property.java:204: warning: [rawtypes] found raw type: Map
+                            } else if (item instanceof Map map) {
+                                                       ^
+  missing type arguments for generic class Map<K,V>
+  where K,V are type-variables:
+    K extends Object declared in interface Map
+    V extends Object declared in interface Map
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/VariableRenderer.java:68: warning: [rawtypes] found raw type: Class
+            new Class[]{Extension.class},
+                ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/VariableRenderer.java:91: warning: [rawtypes] found raw type: Class
+            new Class[]{Function.class, RenderingFunctionInterface.class},
+                ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/VariableRenderer.java:104: warning: [rawtypes] found raw type: Class
+            new Class[]{Function.class},
+                ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/executions/Variables.java:211: warning: [serial] serializable class Serializer has no definition of serialVersionUID
+    class Serializer extends StdSerializer<Variables> {
+    ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/executions/Variables.java:240: warning: [serial] serializable class Deserializer has no definition of serialVersionUID
+    class Deserializer extends StdDeserializer<Variables> {
+    ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/templates/Template.java:47: warning: [deprecation] setSerializationInclusion(Include) in ObjectMapper has been deprecated
+        .setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+        ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/WorkerInstance.java:25: warning: [deprecation] @Deprecated annotation has no effect on this variable declaration
+public record WorkerInstance(
+       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/QueryFilter.java:54: warning: non-varargs call of varargs method with inexact argument type for last parameter;
+        return value instanceof String valueStr ? Arrays.asList(valueStr.split(",")) : (List<Object>) value;
+                                                                              ^
+  cast to Object for a varargs call
+  cast to Object[] for a non-varargs call and to suppress this warning
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/trigger/Webhook.java:102: warning: [deprecation] setSerializationInclusion(Include) in ObjectMapper has been deprecated
+        .setSerializationInclusion(JsonInclude.Include.USE_DEFAULTS);
+        ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/services/PluginDefaultService.java:61: warning: [deprecation] setSerializationInclusion(Include) in ObjectMapper has been deprecated
+        .setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+        ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/services/PluginDefaultService.java:64: warning: [deprecation] setSerializationInclusion(Include) in ObjectMapper has been deprecated
+        .setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/services/PluginDefaultService.java:410: warning: [deprecation] Template in io.kestra.plugin.core.flow has been deprecated
+            full.allTasksWithChilds().stream().filter(task -> task instanceof Template).forEach(task -> ((Template) task).setTenantId(tenant));
+                                                                              ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/services/PluginDefaultService.java:410: warning: [deprecation] Template in io.kestra.plugin.core.flow has been deprecated
+            full.allTasksWithChilds().stream().filter(task -> task instanceof Template).forEach(task -> ((Template) task).setTenantId(tenant));
+                                                                                                          ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/DefaultRunContext.java:519: warning: [removal] tenantId() in RunContext has been deprecated and marked for removal
+    public String tenantId() {
+                  ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/serializers/JacksonMapper.java:143: warning: [deprecation] setSerializationInclusion(Include) in ObjectMapper has been deprecated
+            .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+            ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/serializers/JacksonMapper.java:156: warning: [deprecation] setSerializationInclusion(Include) in ObjectMapper has been deprecated
+            .setSerializationInclusion(JsonInclude.Include.ALWAYS)
+            ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/docs/JsonSchemaGenerator.java:133: warning: [deprecation] fields() in ObjectNode has been deprecated
+                properties.fields().forEachRemaining(e -> {
+                          ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/docs/ClassPluginDocumentation.java:86: warning: [unchecked] unchecked cast
+        return (ClassPluginDocumentation<T>) CACHE.computeIfAbsent(
+                                                                  ^
+  required: ClassPluginDocumentation<T>
+  found:    ClassPluginDocumentation<CAP#1>
+  where T is a type-variable:
+    T extends Object declared in method <T>of(JsonSchemaGenerator,PluginClassAndMetadata<T>,String,boolean)
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/docs/JsonSchemaCache.java:38: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        registerClassForType(SchemaType.FLOW, Flow.class);
+                            ^
+warning: [rawtypes] found raw type: Class
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+warning: [rawtypes] found raw type: Class
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/docs/DocumentationGenerator.java:265: warning: [rawtypes] found raw type: AbstractClassDocumentation
+    public static String render(AbstractClassDocumentation classInputDocumentation) throws IOException {
+                                ^
+  missing type arguments for generic class AbstractClassDocumentation<T>
+  where T is a type-variable:
+    T extends Object declared in class AbstractClassDocumentation
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/endpoints/BasicAuthEndpointsFilter.java:33: warning: [deprecation] RouteMatchUtils in io.micronaut.web.router has been deprecated
+        Optional<RouteMatch> routeMatch = RouteMatchUtils.findRouteMatch(request);
+                                          ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/exceptions/ConflictException.java:13: warning: [serial] serializable class ConflictException has no definition of serialVersionUID
+public class ConflictException extends KestraRuntimeException {
+       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/exceptions/NotFoundException.java:6: warning: [serial] serializable class NotFoundException has no definition of serialVersionUID
+public class NotFoundException extends KestraRuntimeException {
+       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/exceptions/AiException.java:8: warning: [serial] serializable class AiException has no definition of serialVersionUID
+public class AiException extends KestraRuntimeException {
+       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/tasks/RunnableTaskException.java:10: warning: [serial] serializable class RunnableTaskException has no definition of serialVersionUID
+public class RunnableTaskException extends Exception {
+       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/tasks/RunnableTaskException.java:11: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final Output output;
+                         ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/models/validations/KestraConstraintViolationException.java:30: warning: [rawtypes] found raw type: Input
+                if (violation.getLeafBean() instanceof Input input) {
+                                                       ^
+  missing type arguments for generic class Input<T>
+  where T is a type-variable:
+    T extends Object declared in class Input
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/trace/DefaultTracer.java:88: warning: [try] auto-closeable resource ignored is never referenced in body of corresponding try statement
+        try (Scope ignored = context.makeCurrent()) {
+                   ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/trace/DefaultTracer.java:107: warning: [try] auto-closeable resource ignored is never referenced in body of corresponding try statement
+        try (Scope ignored = span.makeCurrent()) {
+                   ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/serializers/DurationDeserializer.java:40: warning: [deprecation] <T>extractSecondsAndNanos(BigDecimal,BiFunction<Long,Integer,T>) in DecimalUtils has been deprecated
+            return DecimalUtils.extractSecondsAndNanos(bigDecimal, Duration::ofSeconds);
+                               ^
+  where T is a type-variable:
+    T extends Object declared in method <T>extractSecondsAndNanos(BigDecimal,BiFunction<Long,Integer,T>)
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/Extension.java:62: warning: [rawtypes] found raw type: HttpFunction
+    private HttpFunction httpFunction;
+            ^
+  missing type arguments for generic class HttpFunction<T>
+  where T is a type-variable:
+    T extends Object declared in class HttpFunction
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/functions/HttpFunction.java:78: warning: [unchecked] unchecked cast
+        Map<String, Object> query = (Map<String, Object>) args.getOrDefault("query", Collections.emptyMap());
+                                                                           ^
+  required: Map<String,Object>
+  found:    Object
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/functions/HttpFunction.java:84: warning: [unchecked] unchecked cast
+        Map<String, List<String>> headers = Optional.ofNullable((Map<String, Object>) args.get("headers"))
+                                                                                              ^
+  required: Map<String,Object>
+  found:    Object
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/functions/HttpFunction.java:120: warning: [unchecked] unchecked cast
+            .map(e -> Map.entry(e.getKey(), e.getValue() instanceof String valueStr ? List.of(valueStr) : (List<String>) e.getValue()))
+                                                                                                                                   ^
+  required: List<String>
+  found:    Object
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/functions/HttpFunction.java:127: warning: [unchecked] unchecked cast
+        Class<T> bodyClass = (Class<T>) args.get("body").getClass();
+                                                                 ^
+  required: Class<T>
+  found:    Class<CAP#1>
+  where T is a type-variable:
+    T extends Object declared in class HttpFunction
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ? extends Object
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/functions/HttpFunction.java:129: warning: [unchecked] unchecked cast
+        bodyWriter.writeTo(Argument.of(bodyClass), MediaType.of(contentType), (T) args.get("body"), new SimpleHttpHeaders(), byteArrayOutputStream);
+                                                                                          ^
+  required: T
+  found:    Object
+  where T is a type-variable:
+    T extends Object declared in class HttpFunction
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/functions/TasksWithStateFunction.java:33: warning: [unchecked] unchecked cast
+            .get("tasks");
+                ^
+  required: Map<String,Object>
+  found:    Object
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/functions/TasksWithStateFunction.java:40: warning: [unchecked] unchecked cast
+                    Map<String, Object> taskDetailsMap = (Map<String, Object>) taskDetailsObj;
+                                                                               ^
+  required: Map<String,Object>
+  found:    Object
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/functions/TasksWithStateFunction.java:55: warning: [unchecked] unchecked cast
+                                Map<String, Object> nestedMap = (Map<String, Object>) valueObj;
+                                                                                      ^
+  required: Map<String,Object>
+  found:    Object
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/runners/pebble/functions/TasksWithStateFunction.java:67: warning: [unchecked] unchecked cast
+                            Map<String, Object> nestedMap = (Map<String, Object>) valueObj;
+                                                                                  ^
+  required: Map<String,Object>
+  found:    Object
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/plugins/PluginManager.java:16: warning: [try] auto-closeable resource PluginManager has a member method close() that could throw InterruptedException
+public interface PluginManager extends AutoCloseable {
+       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/plugins/LocalPluginManager.java:32: warning: [try] auto-closeable resource LocalPluginManager has a member method close() that could throw InterruptedException
+public class LocalPluginManager implements PluginManager {
+       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/plugins/MavenPluginDownloader.java:208: warning: [deprecation] getFile() in Artifact has been deprecated
+                result.getArtifact().getFile().toPath().toUri()
+                                    ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/plugins/DefaultPluginRegistry.java:92: warning: [rawtypes] found raw type: Class
+                    .map(Class::getName)
+                         ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/plugins/DefaultPluginRegistry.java:159: warning: [rawtypes] found raw type: PluginClassAndMetadata
+                    PluginClassAndMetadata metadata = entry.getValue();
+                    ^
+  missing type arguments for generic class PluginClassAndMetadata<T>
+  where T is a type-variable:
+    T extends Object declared in record PluginClassAndMetadata
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClientRequestException.java:13: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    protected final HttpRequest request;
+                                ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClient.java:160: warning: [deprecation] setSSLSocketFactory(LayeredConnectionSocketFactory) in PoolingHttpClientConnectionManagerBuilder has been deprecated
+                connectionManagerBuilder.setSSLSocketFactory(this.selfSignedConnectionSocketFactory());
+                                        ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClient.java:198: warning: [deprecation] SSLConnectionSocketFactory in org.apache.hc.client5.http.ssl has been deprecated
+    private SSLConnectionSocketFactory selfSignedConnectionSocketFactory() {
+            ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClient.java:198: warning: [deprecation] SSLConnectionSocketFactory in org.apache.hc.client5.http.ssl has been deprecated
+    private SSLConnectionSocketFactory selfSignedConnectionSocketFactory() {
+            ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClient.java:198: warning: [deprecation] SSLConnectionSocketFactory in org.apache.hc.client5.http.ssl has been deprecated
+    private SSLConnectionSocketFactory selfSignedConnectionSocketFactory() {
+            ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClient.java:198: warning: [deprecation] SSLConnectionSocketFactory in org.apache.hc.client5.http.ssl has been deprecated
+    private SSLConnectionSocketFactory selfSignedConnectionSocketFactory() {
+            ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClient.java:198: warning: [deprecation] SSLConnectionSocketFactory in org.apache.hc.client5.http.ssl has been deprecated
+    private SSLConnectionSocketFactory selfSignedConnectionSocketFactory() {
+            ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClient.java:205: warning: [deprecation] SSLConnectionSocketFactory in org.apache.hc.client5.http.ssl has been deprecated
+            return new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE);
+                       ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClientResponseException.java:15: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    protected final HttpRequest request;
+                                ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/http/client/HttpClientResponseException.java:18: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    protected HttpResponse<?> response;
+                              ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/cache/NoopCache.java:80: warning: [unchecked] unchecked cast
+        return (ConcurrentMap<K, V>) EMPTY_MAP;
+                                     ^
+  required: ConcurrentMap<K,V>
+  found:    ConcurrentMap<CAP#1,CAP#2>
+  where K,V are type-variables:
+    K extends Object declared in class NoopCache
+    V extends Object declared in class NoopCache
+  where CAP#1,CAP#2 are fresh type-variables:
+    CAP#1 extends Object from capture of ?
+    CAP#2 extends Object from capture of ?
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Slugify.java:25: warning: [deprecation] removeStart(String,String) in StringUtils has been deprecated
+        slug = StringUtils.removeStart(slug, "-");
+                          ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Slugify.java:26: warning: [deprecation] removeEnd(String,String) in StringUtils has been deprecated
+        slug = StringUtils.removeEnd(slug, "-");
+                          ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/Enums.java:132: warning: [unchecked] unchecked cast
+            case List<?> list when !list.isEmpty() && enumClass.isInstance(list.getFirst()) -> (List<T>) list;
+                                                                                                         ^
+  required: List<T>
+  found:    List<CAP#1>
+  where T is a type-variable:
+    T extends Enum<T> declared in method <T>fromList(Object,Class<T>)
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/core/utils/ListUtils.java:69: warning: [unchecked] unchecked cast
+            return (List<String>) list;
+                                  ^
+  required: List<String>
+  found:    List<CAP#1>
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/flow/Template.java:273: warning: [removal] updateTask(String,Task) in Flow has been deprecated and marked for removal
+                            flowReference.get().updateTask(
+                                               ^
+/tmp/Zeeeepa/kestra/core/src/main/java/io/kestra/plugin/core/execution/UnsetVariables.java:81: warning: [unchecked] unchecked cast
+            removeVar((Map<String, Object>) vars.get(prefix), suffix, ignoreMissing);
+                                                    ^
+  required: Map<String,Object>
+  found:    Object
+72 warnings
+
+> Task :executor:compileJava
+> Task :scheduler:compileJava
+> Task :worker:compileJava
+> Task :script:compileJava
+/tmp/Zeeeepa/kestra/script/src/main/java/io/kestra/plugin/scripts/exec/scripts/runners/CommandsWrapper.java:180: warning: [rawtypes] found raw type: ScriptOutputBuilder
+        ScriptOutput.ScriptOutputBuilder scriptOutputBuilder = ScriptOutput.builder();
+                    ^
+  missing type arguments for generic class ScriptOutputBuilder<C,B>
+  where C,B are type-variables:
+    C extends ScriptOutput declared in class ScriptOutputBuilder
+    B extends ScriptOutputBuilder<C,B> declared in class ScriptOutputBuilder
+/tmp/Zeeeepa/kestra/script/src/main/java/io/kestra/plugin/scripts/exec/scripts/runners/CommandsWrapper.java:185: warning: [unchecked] unchecked call to outputFiles(Map<String,URI>) as a member of the raw type ScriptOutputBuilder
+                .outputFiles(getOutputFiles(taskRunnerRunContext))
+                            ^
+  where B,C are type-variables:
+    B extends ScriptOutputBuilder<C,B> declared in class ScriptOutputBuilder
+    C extends ScriptOutput declared in class ScriptOutputBuilder
+/tmp/Zeeeepa/kestra/script/src/main/java/io/kestra/plugin/scripts/exec/scripts/runners/CommandsWrapper.java:192: warning: [unchecked] unchecked call to vars(Map<String,Object>) as a member of the raw type ScriptOutputBuilder
+                    .vars(taskRunnerResult.getLogConsumer().getOutputs());
+                         ^
+  where B,C are type-variables:
+    B extends ScriptOutputBuilder<C,B> declared in class ScriptOutputBuilder
+    C extends ScriptOutput declared in class ScriptOutputBuilder
+/tmp/Zeeeepa/kestra/script/src/main/java/io/kestra/plugin/scripts/exec/scripts/runners/CommandsWrapper.java:200: warning: [unchecked] unchecked call to vars(Map<String,Object>) as a member of the raw type ScriptOutputBuilder
+                .vars(e.getLogConsumer() != null ? e.getLogConsumer().getOutputs() : null)
+                     ^
+  where B,C are type-variables:
+    B extends ScriptOutputBuilder<C,B> declared in class ScriptOutputBuilder
+    C extends ScriptOutput declared in class ScriptOutputBuilder
+/tmp/Zeeeepa/kestra/script/src/main/java/io/kestra/plugin/scripts/exec/scripts/runners/CommandsWrapper.java:201: warning: [unchecked] unchecked call to outputFiles(Map<String,URI>) as a member of the raw type ScriptOutputBuilder
+                .outputFiles(getOutputFiles(taskRunnerRunContext))
+                            ^
+  where B,C are type-variables:
+    B extends ScriptOutputBuilder<C,B> declared in class ScriptOutputBuilder
+    C extends ScriptOutput declared in class ScriptOutputBuilder
+5 warnings
+
+> Task :jdbc:compileJava
